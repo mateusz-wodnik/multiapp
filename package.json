@@ -112,6 +112,9 @@
     "extends": [
       "airbnb"
     ],
+    "rules": {
+      "import/no-named-as-default": 0
+    },
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaFeatures": {
