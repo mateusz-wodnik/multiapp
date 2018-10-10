@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import List from './List';
+import Filters from './Filters';
 
 describe('Filters component', () => {
 
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<List />);
+        wrapper = shallow(<Filters />);
     });
 
     it('renders without crashing', () => {
