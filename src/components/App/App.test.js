@@ -13,6 +13,4 @@ describe('App component', () => {
   it('renders without crashing', () => {
     expect(wrapper.exists()).toEqual(true);
   });
-
-  it('contains pokemons list', () => {});
 });
