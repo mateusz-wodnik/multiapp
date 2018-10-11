@@ -1,4 +1,24 @@
-import data from '../../tasks.data';
+import { set, del, Store } from 'idb-keyval';
+import uuidv4 from 'uuid/v4';
+import dateParser from '../../../../_utils/dateParser';
+import TaskModel from './Task.model';
+
+Store.prototype.getAll = function (collectionName) {
+  return this._dbp
+    .then(db => (
+      new Promise((res, rej) => {
+        const collection = db
+          .transaction(collectionName)
+          .objectStore(collectionName)
+          .getAll();
+        collection.onsuccess = () => res(collection.result);
+        collection.onerror = () => rej(Error('Get list errored'));
+      })
+    ));
+};
+
+const act = dateParser(new Date());
+const tasksStore = new Store(`${act.day}-${act.month}-${act.year}`, 'tasks');
 
 export const SET_LIST = 'SET_LIST';
 export const ADD_TASK = 'ADD_TASK';
@@ -11,8 +31,9 @@ export const setList = list => ({
 
 export const setListRequest = () => (
   (dispatch) => {
-    const list = data;
-    dispatch(setList(list));
+    tasksStore.getAll('tasks')
+      .then(list => dispatch(setList(list)))
+      .catch(console.error);
   }
 );
 
@@ -23,7 +44,12 @@ export const addTask = task => ({
 
 export const addTaskRequest = task => (
   (dispatch) => {
-    dispatch(addTask(task));
+    const _id = uuidv4();
+    console.log(task);
+    const newTask = TaskModel(_id, task);
+    set(_id, newTask, tasksStore)
+      .then(() => dispatch(addTask(newTask)))
+      .catch(console.error);
   }
 );
 
@@ -34,6 +60,8 @@ export const removeTask = task => ({
 
 export const removeTaskRequest = task => (
   (dispatch) => {
-    dispatch(removeTask(task));
+    del(task._id, tasksStore)
+      .then(() => dispatch(removeTask(task)))
+      .catch(console.error);
   }
 );

@@ -5,22 +5,16 @@ import connect from 'react-redux/es/connect/connect';
 import * as actions from '../../../TasksManager/components/List/actions';
 
 class NewTaskForm extends Component {
-  generateOptions = (quantity) => {
-    const output = [];
-    for (let i = 0; i <= quantity; i++) { // eslint-disable-line
-      output.push(<option key={i} value={i}>{i}</option>);
-    }
-    return output;
-  };
-
   handleForm = (e) => {
     e.preventDefault();
     const { addTaskRequest } = this.props;
-    const { title, hour, minute } = e.target;
+    const { title, date, time } = e.target;
+    const dateString = `${date.value} ${time.value}`;
+    const dateObj = new Date(...dateString.split(/\D/));
+    console.log(dateObj);
     const task = {
       title: title.value,
-      hour: hour.value,
-      minute: minute.value,
+      date: dateObj,
       categories: ['important'],
     };
     addTaskRequest(task);
@@ -41,24 +35,8 @@ class NewTaskForm extends Component {
           <div className={`${bs['input-group-prepend']}`}>
             <input className={`${bs.btn} ${bs['btn-danger']}`} placeholder="Reset" type="reset" />
           </div>
-          <select
-            name="hour"
-            className={`${bs['custom-select']}`}
-            defaultValue="Hours"
-            aria-label="Select hour"
-          >
-            <option value="Hours" hidden disabled>Hours</option>
-            {this.generateOptions(23)}
-          </select>
-          <select
-            name="minute"
-            className={`${bs['custom-select']}`}
-            defaultValue="Minutes"
-            aria-label="Select minutes"
-          >
-            <option value="Minutes" hidden disabled>Minutes</option>
-            {this.generateOptions(59)}
-          </select>
+          <input type="date" className={bs['form-control']} name="date" defaultValue={new Date()} />
+          <input type="time" className={bs['form-control']} name="time" defaultValue={new Date()} />
           <div className={`${bs['input-group-append']}`}>
             <button className={`${bs.btn} ${bs['btn-success']}`} type="submit">Add</button>
           </div>

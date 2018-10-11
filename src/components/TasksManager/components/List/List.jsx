@@ -35,7 +35,9 @@ List.propTypes = {
 };
 
 const handleFilter = (list, filters) => (
-  list.filter(item => filters.some(filter => item.categories.includes(filter)))
+  filters.length
+    ? list.filter(item => filters.some(filter => item.categories.includes(filter)))
+    : list
 );
 
 const mapStateToProps = state => ({

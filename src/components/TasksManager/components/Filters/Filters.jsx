@@ -6,12 +6,13 @@ import styles from './Filters.sass';
 import * as actions from './actions';
 
 class Filters extends Component {
-  componentDidUpdate(prevProps) {
-    const { setFilters, filterTypes } = this.props;
-    if (prevProps.filterTypes.length === 0) {
-      setFilters(filterTypes);
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { setFilters, filterTypes } = this.props;
+  //   console.log(prevProps.filterTypes, filterTypes);
+  //   if (prevProps.filterTypes.length === 0) {
+  //     setFilters(filterTypes);
+  //   }
+  // }
 
   handleButtons = (e, filter) => {
     const {
@@ -34,7 +35,7 @@ class Filters extends Component {
     return (
       <section className={`${styles.container} ${bs['btn-group']}`}>
         <button
-          className={`${bs.btn} ${styles.filter} ${filters.length === filterTypes.length ? styles.active : ''}`}
+          className={`${bs.btn} ${styles.filter} ${filters.length === 0 ? styles.active : ''}`}
           type="button"
           role="checkbox"
           aria-checked={filters.length === filterTypes.length}
