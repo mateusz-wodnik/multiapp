@@ -34,7 +34,7 @@ class Filters extends Component {
     return (
       <section className={`${styles.container} ${bs['btn-group']}`}>
         <button
-          className={`${bs.btn} ${filters.length === filterTypes.length ? styles.active : ''}`}
+          className={`${bs.btn} ${styles.filter} ${filters.length === filterTypes.length ? styles.active : ''}`}
           type="button"
           role="checkbox"
           aria-checked={filters.length === filterTypes.length}
@@ -45,7 +45,7 @@ class Filters extends Component {
         {filterTypes.map(filter => (
           <button
             key={filter}
-            className={`${bs.btn} ${filters.includes(filter) ? styles.active : ''}`}
+            className={`${bs.btn} ${styles.filter} ${filters.includes(filter) ? styles.active : ''}`}
             type="button"
             role="checkbox"
             aria-checked={filters.includes(filter)}
