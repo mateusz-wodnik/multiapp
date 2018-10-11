@@ -4,7 +4,9 @@ import timeParser from '../../_utils/timeParser';
 
 class Clock extends Component {
   state = {
-    time: '',
+    hours: '',
+    minutes: '',
+    seconds: '',
   };
 
   componentDidMount() {
@@ -18,7 +20,7 @@ class Clock extends Component {
   startClock = () => {
     this.clock = setInterval(() => {
       const act = new Date();
-      this.setState({ time: timeParser(act) });
+      this.setState(timeParser(act));
     }, 1000);
   };
 
@@ -27,9 +29,9 @@ class Clock extends Component {
   };
 
   render() {
-    const { time } = this.state;
+    const { hours, minutes, seconds } = this.state;
     const { className } = this.props;
-    return <time className={className}>{time}</time>;
+    return <time className={className}>{`${hours}:${minutes}:${seconds}`}</time>;
   }
 }
 
