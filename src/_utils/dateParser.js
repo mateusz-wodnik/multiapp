@@ -1,4 +1,13 @@
 function dateParser(date = new Date()) {
+  const dayTablePL = [
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+  ];
   const year = date.getFullYear();
   const month = date.getMonth();
   const day = date.getDay();
@@ -6,6 +15,7 @@ function dateParser(date = new Date()) {
     year,
     month,
     day,
+    dayTablePL,
   };
 }
 

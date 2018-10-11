@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import bs from 'bootstrap/dist/css/bootstrap.min.css';
+import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './BasicHeader.sass';
 import Clock from '../../../../modules/Clock/Clock';
 import dateParser from '../../../../_utils/dateParser';
@@ -9,6 +9,7 @@ class BasicHeader extends Component {
     day: '',
     month: '',
     year: '',
+    dayTablePL: [],
   };
 
   componentDidMount() {
@@ -21,13 +22,16 @@ class BasicHeader extends Component {
   };
 
   render() {
-    const { day, month, year } = this.state;
+    const {
+      day, month, year, dayTablePL,
+    } = this.state;
     return (
-      <article className={`${styles.container}`}>
-        <time>{day}</time>
-        <Clock />
-        <time dateTime={`${year}-${month}-${day}`}>{`${day}/${month}/${year}`}</time>
-      </article>
+      <header className={`${styles.container}`}>
+        <time className={styles.day}>{dayTablePL[day - 1]}</time>
+        <Clock className={styles.clock} />
+        <time className={styles.date} dateTime={`${year}-${month}-${day}`}>{`${day}/${month}/${year}`}</time>
+        <button type="button" className={`${styles.config} ${bs.btn} ${bs['btn-outline-warning']}`}>⚙</button>
+      </header>
     );
   }
 }

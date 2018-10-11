@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import timeParser from '../../_utils/timeParser';
 
 class Clock extends Component {
@@ -27,12 +28,17 @@ class Clock extends Component {
 
   render() {
     const { time } = this.state;
-    return (
-      <div>
-        <time>{time}</time>
-      </div>
-    );
+    const { className } = this.props;
+    return <time className={className}>{time}</time>;
   }
 }
+
+Clock.defaultProps = {
+  className: '',
+};
+
+Clock.propTypes = {
+  className: PropTypes.string,
+};
 
 export default Clock;
