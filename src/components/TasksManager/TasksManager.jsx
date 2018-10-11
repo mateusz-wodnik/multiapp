@@ -6,10 +6,10 @@ import Filters from './components/Filters/Filters';
 
 
 const TasksManager = () => (
-  <article className={`${styles.container}`}>
+  <header className={`${styles.container}`}>
     <Filters />
     <List />
-  </article>
+  </header>
 );
 
 export default TasksManager; // eslint-disable-line
