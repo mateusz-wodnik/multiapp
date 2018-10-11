@@ -13,7 +13,7 @@ function list(state = initialState, action) {
     case ADD_TASK:
       return [...state, action.task];
     case REMOVE_TASK:
-      return state.filter(item => item._id !== task._id); // eslint-disable-line
+      return state.filter(item => item._id !== action.task._id); // eslint-disable-line
     default:
       return state;
   }

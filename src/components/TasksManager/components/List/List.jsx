@@ -13,10 +13,10 @@ export class List extends Component {
   }
 
   render() {
-    const { tasks } = this.props;
+    const { tasks, removeTaskRequest } = this.props;
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
-        {tasks.map(task => <li key={task._id} className={`${styles.item} ${bs['list-group-item']}`}><Task {...task} /></li>)} {/*eslint-disable-line*/}
+        {tasks.map(task => <li key={task._id} className={`${styles.item} ${bs['list-group-item']}`}><Task {...task} removeTask={removeTaskRequest} /></li>)} {/*eslint-disable-line*/}
       </ul>
     );
   }
@@ -25,11 +25,13 @@ export class List extends Component {
 List.defaultProps = {
   setListRequest: () => null,
   tasks: [],
+  removeTaskRequest: () => null,
 };
 
 List.propTypes = {
   setListRequest: PropTypes.func,
   tasks: PropTypes.arrayOf(PropTypes.object),
+  removeTaskRequest: PropTypes.func,
 };
 
 const handleFilter = (list, filters) => (

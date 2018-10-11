@@ -21,10 +21,9 @@ export const addTask = task => ({
   task,
 });
 
-export const addTaskRequest = () => (
+export const addTaskRequest = task => (
   (dispatch) => {
-    const list = data;
-    dispatch(addTask(list));
+    dispatch(addTask(task));
   }
 );
 
@@ -33,9 +32,8 @@ export const removeTask = task => ({
   task,
 });
 
-export const removeTaskRequest = () => (
+export const removeTaskRequest = task => (
   (dispatch) => {
-    const list = data;
-    dispatch(removeTask(list));
+    dispatch(removeTask(task));
   }
 );

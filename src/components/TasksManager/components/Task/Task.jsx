@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import timeParser from '../../../../_utils/timeParser';
+import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Task.sass';
+import timeParser from '../../../../_utils/timeParser';
 
 
 const Task = ({
-  title, date, description, tags, categories, open,
+  title, date, description, tags, categories, open, removeTask, _id,
 }) => {
   const time = timeParser(new Date(date));
   return (
@@ -13,6 +14,7 @@ const Task = ({
       <header className={styles.header}>
         <h4 className={styles.title}>{title}</h4>
         <time>{`${time.hours}:${time.minutes}`}</time>
+        <button className={`${bs.btn} ${bs['btn-danger']}`} type="button" onClick={() => removeTask({ _id })}>✖</button>
       </header>
       {/* Todo: content should be visible only on specific task page */}
       {open && (
@@ -38,6 +40,8 @@ Task.defaultProps = {
   tags: [],
   categories: [],
   open: false,
+  _id: '',
+  removeTask: () => null,
 };
 
 Task.propTypes = {
@@ -47,6 +51,8 @@ Task.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   categories: PropTypes.arrayOf(PropTypes.string),
   open: PropTypes.bool,
+  _id: PropTypes.string,
+  removeTask: PropTypes.func,
 };
 
 export default Task;
