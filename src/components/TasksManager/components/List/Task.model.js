@@ -5,10 +5,10 @@ const TaskModel = (id, task) => {
     _id = id || uuidv4(),
     title = '',
     description = '',
-    participiants = [],
-    address = '',
-    latitude = '',
-    longitude = '',
+    participiants = [], // TODO Implement add/remove users through server requests
+    address = '', // TODO Add place selectiot by map/search
+    latitude = '', // TODO Add place selectiot by map/search
+    longitude = '', // TODO Add place selectiot by map/search
     tags = [],
     categories = ['important'],
     date = new Date(),
@@ -17,10 +17,10 @@ const TaskModel = (id, task) => {
     _id,
     title,
     description,
-    participiants,
-    address,
-    latitude,
-    longitude,
+    participiants, // TODO Implement add/remove users through server requests
+    address, // TODO Add place selectiot by map/search
+    latitude, // TODO Add place selectiot by map/search
+    longitude, // TODO Add place selectiot by map/search
     tags,
     categories,
     date,

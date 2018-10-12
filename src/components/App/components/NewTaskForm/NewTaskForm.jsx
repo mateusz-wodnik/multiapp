@@ -8,14 +8,16 @@ class NewTaskForm extends Component {
   handleForm = (e) => {
     e.preventDefault();
     const { addTaskRequest } = this.props;
-    const { title, date, time } = e.target;
+    const {
+      title, date, time, description, categories,
+    } = e.target;
     const dateString = `${date.value} ${time.value}`;
     const dateObj = new Date(...dateString.split(/\D/));
-    console.log(dateObj);
     const task = {
       title: title.value,
+      description: description.value,
       date: dateObj,
-      categories: ['important'],
+      categories: [...categories.selectedOptions].map(option => option.value),
     };
     addTaskRequest(task);
   };
@@ -31,6 +33,19 @@ class NewTaskForm extends Component {
           placeholder="Title"
           aria-label="Title"
         />
+        <textarea
+          className={bs['form-control']}
+          name="description"
+          placeholder="Description"
+          aria-label="Description"
+        />
+        <select multiple className={bs['form-control']} name="categories" defaultValue="categories">
+          <option value="categories" disabled hidden>category</option>
+          <option value="important">important</option>
+          <option value="fun">fun</option>
+          <option value="work">work</option>
+          <option value="family">family</option>
+        </select>
         <div className={bs['input-group']}>
           <div className={`${bs['input-group-prepend']}`}>
             <input className={`${bs.btn} ${bs['btn-danger']}`} placeholder="Reset" type="reset" />

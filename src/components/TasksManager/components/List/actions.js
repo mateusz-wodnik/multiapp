@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { set, del, Store } from 'idb-keyval';
 import uuidv4 from 'uuid/v4';
 import dateParser from '../../../../_utils/dateParser';
@@ -45,7 +46,6 @@ export const addTask = task => ({
 export const addTaskRequest = task => (
   (dispatch) => {
     const _id = uuidv4();
-    console.log(task);
     const newTask = TaskModel(_id, task);
     set(_id, newTask, tasksStore)
       .then(() => dispatch(addTask(newTask)))

@@ -20,7 +20,6 @@ class Filters extends Component {
     } = this.props;
     const self = e.target;
     const value = self.getAttribute('aria-checked');
-    self.classList.toggle(styles.active);
     if (value === 'true') {
       self.setAttribute('aria-checked', false);
       filter ? removeFilter(filter) : setFilters([]); // eslint-disable-line
