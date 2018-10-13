@@ -24,9 +24,10 @@ class NewTaskForm extends Component {
   };
 
   render() {
-    const { styles } = this.props;
+    const { styles, toggleForm } = this.props;
     return createPortal(
-      <form className={`${styles.container}`} onSubmit={this.handleForm}>
+      <form className={styles.formContainer} onSubmit={this.handleForm}>
+        <button type="button" className={styles.close} onClick={toggleForm}>X</button>
         <input
           type="text"
           className={bs['form-control']}
@@ -77,11 +78,13 @@ class NewTaskForm extends Component {
 NewTaskForm.defaultProps = {
   styles: {},
   addTaskRequest: () => null,
+  toggleForm: () => null,
 };
 
 NewTaskForm.propTypes = {
   styles: PropTypes.objectOf(PropTypes.string),
   addTaskRequest: PropTypes.func,
+  toggleForm: PropTypes.func,
 };
 
 // const mapStateToProps = state => ({});

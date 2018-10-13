@@ -25,7 +25,9 @@ class BasicHeader extends Component {
         >
           {isFormOpened ? '🖉' : '+'}
         </button>
-        {isFormOpened && <NewTaskForm styles={{ container: styles.formContainer }} />}
+        {isFormOpened && (
+          <NewTaskForm toggleForm={this.toggleForm} styles={styles} />
+        )}
       </header>
     );
   }
