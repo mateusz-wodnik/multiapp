@@ -1,0 +1,25 @@
+.container
+  display: flex
+  position: relative
+  height: 125px
+.line
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 100%
+  margin: auto 0
+  background: black
+  height: 5px
+.item
+  position: relative
+  display: flex
+  justify-content: center
+  margin: 0 -5px
+  &:after
+    content: '|'
+    position: absolute
+    align-self: center
+.item:nth-child(even)
+  align-items: flex-start
+.item:nth-child(odd)
+  align-items: flex-end
