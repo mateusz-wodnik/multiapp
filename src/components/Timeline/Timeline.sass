@@ -1,7 +1,8 @@
 .container
   display: flex
   position: relative
-  height: 125px
+  min-height: 80px
+  overflow: auto
 .line
   position: absolute
   top: 0
@@ -9,17 +10,29 @@
   width: 100%
   margin: auto 0
   background: black
-  height: 5px
+  height: 1px
 .item
   position: relative
   display: flex
-  justify-content: center
-  margin: 0 -5px
-  &:after
-    content: '|'
-    position: absolute
-    align-self: center
-.item:nth-child(even)
-  align-items: flex-start
-.item:nth-child(odd)
-  align-items: flex-end
+  flex-flow: column
+  justify-content: space-between
+  align-items: center
+.item:nth-child(2n)
+  flex-direction: column-reverse
+.title
+  border: 2px solid black
+  border-radius: 10px
+  margin-right: 3px
+  padding: 2px
+.time
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  font-size: 0.8em
+  font-weight: 700
+
+.weather
+  --size: 35px
+  height: var(--size)
+  width: var(--size)
