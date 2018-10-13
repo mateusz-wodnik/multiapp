@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import connect from 'react-redux/es/connect/connect';
@@ -24,7 +25,7 @@ class NewTaskForm extends Component {
 
   render() {
     const { styles } = this.props;
-    return (
+    return createPortal(
       <form className={`${styles.container}`} onSubmit={this.handleForm}>
         <input
           type="text"
@@ -50,17 +51,24 @@ class NewTaskForm extends Component {
           <option value="eating">eating</option>
           <option value="shopping">shopping</option>
         </select>
-        <div className={bs['input-group']}>
+        <div className={`${bs['input-group']}`}>
           <div className={`${bs['input-group-prepend']}`}>
-            <input className={`${bs.btn} ${bs['btn-danger']}`} placeholder="Reset" type="reset" />
+            <span className={`${bs['input-group-text']}`}>Set date</span>
           </div>
           <input type="date" className={bs['form-control']} name="date" defaultValue={new Date()} />
-          <input type="time" className={bs['form-control']} name="time" defaultValue={new Date()} />
-          <div className={`${bs['input-group-append']}`}>
-            <button className={`${bs.btn} ${bs['btn-success']}`} type="submit">Add</button>
-          </div>
         </div>
-      </form>
+        <div className={`${bs['input-group']}`}>
+          <div className={`${bs['input-group-prepend']}`}>
+            <span className={`${bs['input-group-text']}`}>Set time</span>
+          </div>
+          <input type="time" className={bs['form-control']} name="time" defaultValue={new Date()} />
+        </div>
+        <div className={bs['input-group']}>
+          <input className={`${bs.btn} ${bs['btn-danger']} ${bs['form-control']}`} placeholder="Reset" type="reset" />
+          <button className={`${bs.btn} ${bs['btn-success']} ${bs['form-control']}`} type="submit">Add</button>
+        </div>
+      </form>,
+      document.querySelector('#modal'),
     );
   }
 }

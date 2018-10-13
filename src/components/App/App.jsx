@@ -10,6 +10,8 @@ const App = () => (
   <div className={`${bs.container} ${styles.container}`}>
     <BasicHeader />
     <TasksManager />
+    {/* MODALS */}
+    <aside id="modal" className={styles.modal}></aside> {/* eslint-disable-line */}
   </div>
 );
 
