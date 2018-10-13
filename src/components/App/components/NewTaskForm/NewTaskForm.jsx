@@ -39,12 +39,16 @@ class NewTaskForm extends Component {
           placeholder="Description"
           aria-label="Description"
         />
+        {/* TODO Add input for custom categories  */}
         <select multiple className={bs['form-control']} name="categories" defaultValue="categories">
           <option value="categories" disabled hidden>category</option>
           <option value="important">important</option>
           <option value="fun">fun</option>
           <option value="work">work</option>
           <option value="family">family</option>
+          <option value="meeting">meeting</option>
+          <option value="eating">eating</option>
+          <option value="shopping">shopping</option>
         </select>
         <div className={bs['input-group']}>
           <div className={`${bs['input-group-prepend']}`}>
