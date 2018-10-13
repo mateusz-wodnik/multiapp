@@ -4,6 +4,7 @@ import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './App.sass';
 import TasksManager from '../TasksManager/TasksManager';
 import BasicHeader from './components/BasicHeader/BasicHeader';
+import Modal from '../../modules/Modal/Modal';
 
 
 const App = () => (
@@ -11,7 +12,7 @@ const App = () => (
     <BasicHeader />
     <TasksManager />
     {/* MODALS */}
-    <aside id="modal" className={styles.modal}></aside> {/* eslint-disable-line */}
+    <Modal styles={styles} />
   </div>
 );
 

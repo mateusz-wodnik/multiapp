@@ -39,6 +39,7 @@ class NewTaskForm extends Component {
           name="description"
           placeholder="Description"
           aria-label="Description"
+          rows="5"
         />
         {/* TODO Add input for custom categories  */}
         <select multiple className={bs['form-control']} name="categories" defaultValue="categories">
