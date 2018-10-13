@@ -1,0 +1,23 @@
+.container
+  display: grid
+  grid-template: auto / 1fr 1fr 1fr
+  grid-template-areas: 'info temperature icon'
+.wind
+  grid-area: info
+.temperature
+  grid-area: temperature
+  margin: auto
+  font-size: 2em
+.icon
+  grid-area: icon
+  margin: 0 0 auto auto
+
+// Date module styles
+.dateInfo
+  grid-area: info
+  display: flex
+  flex-flow: column
+  .date
+    order: -1
+  .clock
+    font-size: 1.2em

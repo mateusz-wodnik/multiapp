@@ -3,13 +3,15 @@ import { hot } from 'react-hot-loader'; // eslint-disable-line
 import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './App.sass';
 import TasksManager from '../TasksManager/TasksManager';
-import BasicHeader from './components/BasicHeader/BasicHeader';
+// import BasicHeader from './components/BasicHeader/BasicHeader';
 import Modal from '../../modules/Modal/Modal';
+import Weather from '../Weather/Weather';
 
 
 const App = () => (
   <div className={`${bs.container} ${styles.container}`}>
-    <BasicHeader />
+    {/* <BasicHeader /> */}
+    <Weather />
     <TasksManager />
     {/* MODALS */}
     <Modal styles={styles} />

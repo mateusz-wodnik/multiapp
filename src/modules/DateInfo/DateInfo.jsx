@@ -25,12 +25,13 @@ class DateInfo extends Component {
     const {
       day, month, year, dayTablePL,
     } = this.state;
-    const { styles } = this.props;
+    const { styles, children } = this.props;
     return (
       <div className={styles.dateInfo}>
         <time className={styles.day}>{dayTablePL[day - 1]}</time>
         <Clock className={styles.clock} />
         <time className={styles.date} dateTime={`${year}-${month}-${day}`}>{`${day}/${month}/${year}`}</time>
+        {children}
       </div>
     );
   }
@@ -38,10 +39,12 @@ class DateInfo extends Component {
 
 DateInfo.defaultProps = {
   styles: '',
+  children: null,
 };
 
 DateInfo.propTypes = {
   styles: PropTypes.objectOf(PropTypes.string),
+  children: PropTypes.node,
 };
 
 export default DateInfo;
