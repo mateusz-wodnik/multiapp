@@ -1,4 +1,4 @@
-import APIKeys from '../../APIKeys';
+import APIKeys from './APIKeys';
 
 export default class openWeather {
   constructor() {
