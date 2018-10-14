@@ -1,7 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader'; // eslint-disable-line
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './App.sass';
+import bs from '../../styles/bootstrap.module.css';
+import styles from './App.module.sass';
 import TasksManager from '../TasksManager/TasksManager';
 // import BasicHeader from './components/BasicHeader/BasicHeader';
 import Modal from '../../modules/Modal/Modal';

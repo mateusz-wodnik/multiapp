@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './global.sass';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/bootstrap-reboot.css';
+import './styles/global.sass';
 
 // Redux
 import { Provider } from 'react-redux';
