@@ -2,16 +2,30 @@
 import React, { Component, createRef } from 'react';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import customStyle from './customStyle';
 
 import styles from './Map.module.sass';
 import getCurrentPosition from './_utils/getCurrentPosition';
+import { connect } from 'react-redux';
+import * as actions from './actions';
+import PropTypes from 'prop-types';
+import Marker from './components/Marker/Marker';
+import data from './mpk.data';
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.mapContainer = createRef();
   }
+
+  componentDidUpdate(prevProps) {
+    const { markers } = this.props;
+    if (prevProps.markers !== markers) {
+      this.addMarkers(markers)
+    }
+  }
+
   componentDidMount() {
     const bounds = [
       [16.652, 50.877], // Southwest coordinates
@@ -26,14 +40,23 @@ class Map extends Component {
       maxZoom: 14,
       maxBounds: bounds
     });
-    this.setCurrentPosition()
+    this.setCurrentPosition();
   }
 
+  addMarkers = (markers) => {
+    markers.map(marker => {
+      const { content, coordinates } = marker;
+      return new mapboxgl.Marker()
+        .setLngLat(coordinates)
+        .addTo(this.map)
+    })
+  };
+
   setCurrentPosition = () => {
+    const map = this.map;
     getCurrentPosition()
       .then(position => {
-        console.log(Object.values(position).map(pos => pos.toPrecision(8)));
-        this.map.flyTo({
+        map.flyTo({
           center: Object.values(position).map(pos => pos.toPrecision(5)).reverse()
         })
       })
@@ -42,9 +65,27 @@ class Map extends Component {
 
   render() {
     return (
-      <div ref={this.mapContainer} className={styles.map}></div>
+      <div ref={this.mapContainer} className={styles.map}>
+        {data.map(item => (
+          <Marker coordinates={[item.y, item.x]}>
+            <span className={item.type}>{item.name}</span>
+          </Marker>
+        ))}
+      </div>
     );
   }
 }
 
-export default Map;
+Marker.defaultProps = {
+  markers: [],
+};
+
+Marker.propTypes = {
+  markers: PropTypes.arrayOf(PropTypes.object),
+};
+
+const mapStateToProps = state => ({
+  markers: state.map.markers,
+});
+
+export default connect(mapStateToProps)(Map);
