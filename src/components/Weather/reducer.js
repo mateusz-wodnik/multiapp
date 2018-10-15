@@ -1,8 +1,16 @@
-import { combineReducers } from 'redux';
-import filters from './components/Filters/reducer';
-import list from './components/List/reducer';
+import {
+  SET_WEATHER,
+} from './actions';
 
-export default combineReducers({
-  filters,
-  list,
-});
+export const initialState = {};
+
+function weather(state = initialState, action) {
+  switch (action.type) {
+    case SET_WEATHER:
+      return action.weather;
+    default:
+      return state;
+  }
+}
+
+export default weather;
