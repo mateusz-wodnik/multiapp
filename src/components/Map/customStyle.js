@@ -80,7 +80,7 @@ const customStyle = (origin, pathname) => ({
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landcover",
-      "maxzoom": 8,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -107,7 +107,7 @@ const customStyle = (origin, pathname) => ({
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landcover",
-      "maxzoom": 8,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -146,7 +146,7 @@ const customStyle = (origin, pathname) => ({
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landuse",
-      "maxzoom": 16,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -754,7 +754,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "maxzoom": 11,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -920,7 +920,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "maxzoom": 6,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -1585,7 +1585,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 15,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -1677,7 +1677,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 15,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -1834,7 +1834,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -1914,7 +1914,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -1999,7 +1999,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -2038,7 +2038,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 8,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -2104,7 +2104,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 8,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
@@ -2175,7 +2175,7 @@ const customStyle = (origin, pathname) => ({
       },
       "source": "openmaptiles",
       "source-layer": "place",
-      "maxzoom": 6,
+      "maxzoom": 14,
       "filter": [
         "all",
         [
