@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './Filters.sass';
+import bs from '../../../../styles/bootstrap.module.css';
+import styles from './Filters.module.sass';
 import * as actions from './actions';
 
 class Filters extends Component {

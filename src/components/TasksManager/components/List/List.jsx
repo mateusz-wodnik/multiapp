@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './List.sass';
+import bs from '../../../../styles/bootstrap.module.css';
+import styles from './List.module.sass';
 import Task from '../Task/Task';
 import * as actions from './actions';
 

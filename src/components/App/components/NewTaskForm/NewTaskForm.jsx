@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import connect from 'react-redux/es/connect/connect';
+import PropTypes from 'prop-types';
+import bs from '../../../../styles/bootstrap.module.css';
 import * as actions from '../../../TasksManager/components/List/actions';
 
 class NewTaskForm extends Component {

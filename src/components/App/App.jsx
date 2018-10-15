@@ -13,10 +13,10 @@ import Map from '../Map/Map';
 
 const App = () => (
   <div className={`${bs.container} ${styles.container}`}>
-    {/*<BasicHeader />*/}
-    {/*<Weather />*/}
-    {/*<Timeline />*/}
-    {/*<TasksManager />*/}
+    <BasicHeader />
+    <Weather />
+    <Timeline />
+    <TasksManager />
     <Map />
     {/* MODALS */}
     <Modal styles={styles} />

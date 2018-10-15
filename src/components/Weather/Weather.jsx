@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
-import styles from './Weather.sass';
+import styles from './Weather.module.sass';
 import DateInfo from '../../modules/DateInfo/DateInfo';
 import * as actions from './actions';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './Task.sass';
+import bs from '../../../../styles/bootstrap.module.css';
+import styles from './Task.module.sass';
 import timeParser from '../../../../_utils/timeParser';
 
 

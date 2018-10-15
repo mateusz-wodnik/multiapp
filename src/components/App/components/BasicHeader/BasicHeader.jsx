@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './BasicHeader.sass';
+import bs from '../../../../styles/bootstrap.module.css';
+import styles from './BasicHeader.module.sass';
 import NewTaskForm from '../NewTaskForm/NewTaskForm';
 import DateInfo from '../../../../modules/DateInfo/DateInfo';
 
