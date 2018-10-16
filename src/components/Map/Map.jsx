@@ -1,7 +1,8 @@
 /* eslint-disable */
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, createContext } from 'react';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import mapboxgl from 'mapbox-gl';
+// import MapboxDirections from '@mapbox/mapbox-gl-directions';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import customStyle from './customStyle';
 
@@ -12,18 +13,17 @@ import * as actions from './actions';
 import PropTypes from 'prop-types';
 import Marker from './components/Marker/Marker';
 import data from './mpk.data';
+import { updateMarker, setMarkers } from './components/Marker/actions';
+
+const MapContext = createContext('elo');
+export const MapProvider = MapContext.Provider;
+export const MapConsumer = MapContext.Consumer;
+
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.mapContainer = createRef();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { markers } = this.props;
-    if (prevProps.markers !== markers) {
-      this.addMarkers(markers)
-    }
   }
 
   componentDidMount() {
@@ -41,16 +41,8 @@ class Map extends Component {
       maxBounds: bounds
     });
     this.setCurrentPosition();
+    this.props.setMarkers(data)
   }
-
-  addMarkers = (markers) => {
-    markers.map(marker => {
-      const { content, coordinates } = marker;
-      return new mapboxgl.Marker()
-        .setLngLat(coordinates)
-        .addTo(this.map)
-    })
-  };
 
   setCurrentPosition = () => {
     const map = this.map;
@@ -64,14 +56,19 @@ class Map extends Component {
   };
 
   render() {
+    const map = this.map;
+    const { markers } = this.props;
     return (
-      <div ref={this.mapContainer} className={styles.map}>
-        {data.map(item => (
-          <Marker coordinates={[item.y, item.x]}>
-            <span className={item.type}>{item.name}</span>
-          </Marker>
-        ))}
-      </div>
+      <MapProvider value={{ map }}>
+        <div ref={this.mapContainer} className={styles.map}>
+          <button onClick={() => this.props.updateMarker()} className={styles.btn}>elo</button>
+          {markers.map(item => (
+            <Marker coordinates={[item.y, item.x]}>
+              <span className={styles[item.type]}>{item.name}</span>
+            </Marker>
+          ))}
+        </div>
+      </MapProvider>
     );
   }
 }
@@ -88,4 +85,4 @@ const mapStateToProps = state => ({
   markers: state.map.markers,
 });
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps, { updateMarker, setMarkers })(Map);
