@@ -8,7 +8,7 @@ import BasicHeader from './components/BasicHeader/BasicHeader';
 import Modal from '../../modules/Modal/Modal';
 import Weather from '../Weather/Weather';
 import Timeline from '../Timeline/Timeline';
-import Map from '../Map/Map';
+import Maps from '../Maps/Maps';
 
 
 const App = () => (
@@ -17,7 +17,7 @@ const App = () => (
     <Weather />
     <Timeline />
     <TasksManager />
-    <Map />
+    <Maps />
     {/* MODALS */}
     <Modal styles={styles} />
   </div>

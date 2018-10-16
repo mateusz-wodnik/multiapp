@@ -9,17 +9,19 @@ import { MapConsumer } from '../../Map';
 class Marker extends Component {
   componentDidMount() {
     const { context: { map }, coordinates, children } = this.props;
+    console.log(this.props)
     const str = ReactDOMServer.renderToString(children);
     const marker = document.createRange().createContextualFragment(str).children[0];
-    this.marker = new mapboxgl.Marker(marker)
-      .setLngLat(coordinates)
-      .addTo(map);
+    // this.marker = new mapboxgl.Marker(marker)
+    //   .setLngLat(coordinates)
+    //   .addTo(map);
   }
 
   componentDidUpdate(prevProps) {
     const { context: { map }, coordinates, children } = this.props;
+    console.log(this.props)
     if (prevProps.context.map !== map) {
-      console.log('elleoeleo')
+      console.log(this.props)
       const str = ReactDOMServer.renderToString(children);
       const marker = document.createRange().createContextualFragment(str).children[0];
       this.marker = new mapboxgl.Marker(marker)
@@ -27,12 +29,12 @@ class Marker extends Component {
         .addTo(map);
     }
 
-    if (prevProps.coordinates !== coordinates) {
-      // TODO: fix set transition only to elements where actual values has changed not only object references
-      console.log(prevProps.coordinates, coordinates);
-      // this.marker.getElement().style = 'transition: 2s';
-      this.marker.setLngLat(coordinates);
-    }
+    // if (prevProps.coordinates !== coordinates) {
+    //   // TODO: fix set transition only to elements where actual values has changed not only object references
+    //   console.log(prevProps.coordinates, coordinates);
+    //   // this.marker.getElement().style = 'transition: 2s';
+    //   this.marker.setLngLat(coordinates);
+    // }
   }
 
   componentWillUnmount() {
