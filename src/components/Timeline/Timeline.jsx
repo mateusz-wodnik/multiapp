@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './Timeline.sass';
+import styles from './Timeline.module.sass';
 import timeParser from '../../_utils/timeParser';
 import data from './forecast.data';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Modal.sass';
+import styles from './Modal.module.sass';
 
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
 
