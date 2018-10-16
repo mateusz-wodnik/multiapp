@@ -3,4 +3,5 @@ import MarkerReducer from './ReducerCreator';
 
 export default combineReducers({
   mpk: MarkerReducer('MPK'),
+  stations: MarkerReducer('STATIONS'),
 });

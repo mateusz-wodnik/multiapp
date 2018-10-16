@@ -8,6 +8,7 @@ import customStyle from './customStyle';
 
 import styles from './Map.module.sass';
 import getCurrentPosition from './_utils/getCurrentPosition';
+import Layer from './components/Layer/Layer';
 
 const MapContext = createContext('elo');
 export const MapProvider = MapContext.Provider;
@@ -37,7 +38,9 @@ class Map extends Component {
       maxZoom: 14,
       maxBounds: bounds,
     });
-    this.setState({ map }, () => this.setCurrentPosition(this.state.map)); // eslint-disable-line
+    map.on('load', () => {
+      this.setState({ map }, () => this.setCurrentPosition(this.state.map)); // eslint-disable-line
+    });
   }
 
   setCurrentPosition = (map) => {
