@@ -25,7 +25,7 @@ class Weather extends Component {
       </header>
     );
   }
-};
+}
 
 Weather.defaultProps = {
   wind: {},

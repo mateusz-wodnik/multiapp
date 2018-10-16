@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Map from '../../modules/Map/Map';
-import LiveMPK from './components/LiveMPK/LiveMPK';
+import LiveMPK from './markers/LiveMPK/LiveMPK';
 
 class Maps extends Component {
   state = {
