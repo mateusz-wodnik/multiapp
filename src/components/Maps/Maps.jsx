@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import Map from '../../modules/Map/Map';
-import LiveMPK from './markers/LiveMPK/LiveMPK';
-import StationsMPK from './markers/StationsMPK/StationsMPK';
-import GooglePlaces from '../../modules/GoogleWrapper/services/GooglePlaces/GooglePlaces';
-import GoogleWrapper from '../../modules/GoogleWrapper/GoogleWrapper';
+import LiveMPK from './layers/LiveMPK/LiveMPK';
+import StationsMPK from './layers/StationsMPK/StationsMPK';
 import SearchBox from './components/SearchBox/SearchBox';
 
 class Maps extends Component {
   state = {
-    mpk: true,
+    stations: true,
+    live: true,
+    search: true,
+    // TODO: Add tasks layer that contains all daily tasks places
   };
 
   render() {
-    const { mpk } = this.state;
+    const {
+      stations,
+      live,
+      search,
+    } = this.state;
     return (
       <Map>
-        <StationsMPK />
-        <LiveMPK />
-        <SearchBox />
+        <StationsMPK hide={stations} />
+        <LiveMPK hide={live} />
+        <SearchBox hide={search} />
       </Map>
     );
   }

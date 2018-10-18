@@ -5,9 +5,6 @@ import geoJSONParser from '../../../../_utils/geoJSONParser';
 export const SET_MPK = 'SET_MPK';
 export const LOADING_MPK = 'LOADING_MPK';
 export const ERROR_MPK = 'ERROR_MPK';
-export const ADD_MPK = 'ADD_MPK';
-export const REMOVE_MPK = 'REMOVE_MPK';
-export const UPDATE_MPK = 'UPDATE_MPK';
 
 const API = new MPKWroclawAPI();
 

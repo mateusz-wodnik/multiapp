@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
-import Marker from '../../../../modules/Map/components/Marker/Marker';
-import styles from './StationsMPK.module.sass';
 import Layer from '../../../../modules/Map/components/Layer/Layer';
-import * as actions from './actions';
+import { setMarkersRequest } from './actions';
 
 class StationsMPK extends Component {
   componentDidMount() {
@@ -32,4 +30,4 @@ const mapStateToProps = state => ({
   ...state.maps.stations,
 });
 
-export default connect(mapStateToProps, { ...actions })(StationsMPK);
+export default connect(mapStateToProps, { setMarkersRequest })(StationsMPK);
