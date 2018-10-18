@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import { Component, createRef, cloneElement } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import GooglePlacesAPI from '../../../../APIS/googlePlacesAPI';
@@ -11,7 +11,7 @@ class GooglePlaces extends Component {
 
   componentDidMount() {
     const { service } = this.props;
-    service && this.handleAutocomplete(this.input.current);
+    if (service) this.handleAutocomplete(this.input.current);
   }
 
   componentDidUpdate(prevProps) {
@@ -28,7 +28,7 @@ class GooglePlaces extends Component {
 
   render() {
     const { children } = this.props;
-    return React.cloneElement(children, { ref: this.input });
+    return cloneElement(children, { ref: this.input });
   }
 }
 
