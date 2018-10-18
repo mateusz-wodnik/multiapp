@@ -3,7 +3,7 @@ import keys from './APIKeys';
 export default class GooglePlacesAPI {
   constructor() {
     this.baseUrl = 'https://maps.googleapis.com/maps/api/place';
-    this.fromText = (input, inputType = 'textquery', params = '') => `${this.baseUrl}/findplacefromtext/json?key=${keys.googlePlaces}&input=${input}&inputtype=${inputType}&locationbias=rectangle:16.652,50.877|17.363,51.311&fields=formatted_address,geometry,icon,id,name,permanently_closed,photos,place_id,plus_code`;
+    this.fromText = (input, inputType = 'textquery') => `${this.baseUrl}/findplacefromtext/json?key=${keys.googlePlaces}&input=${input}&inputtype=${inputType}&locationbias=rectangle:16.652,50.877|17.363,51.311&fields=formatted_address,geometry,icon,id,name,permanently_closed,photos,place_id,plus_code`;
   }
 
   init(libraries) {
@@ -16,10 +16,8 @@ export default class GooglePlacesAPI {
     })
       .then((res) => {
         const node = document.createElement('span');
-        console.log(res)
         this.places = res.places;
         this.placesService = new res.places.PlacesService(node);
-        console.log(this);
       });
   }
 
@@ -31,7 +29,7 @@ export default class GooglePlacesAPI {
         fields,
         locationBias,
       }, (results, status) => {
-        if (status != this.places.PlacesServiceStatus.OK) reject(Error('Could not get searched place data.'));
+        if (status != this.places.PlacesServiceStatus.OK) reject(Error('Could not get searched place data.')); // eslint-disable-line
         resolve(results);
       });
     });

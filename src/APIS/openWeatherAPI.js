@@ -14,8 +14,6 @@ export default class openWeather {
 
   forecast(city) {
     fetch(`${this.forecast}&q=${city}`)
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(console.error);
+      .then(res => res.json());
   }
 }
