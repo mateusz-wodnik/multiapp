@@ -1,28 +1,21 @@
 export const initialState = {
-  markers: [],
+  markers: {},
   loading: false,
   error: null,
 };
 
 function MarkerReducer(counterName = '') {
   return function markers(state = initialState, action) {
-    const { type, ...update } = action;
-    switch (action.type) {
+    const { type, marker, ...update } = action;
+    switch (type) {
       case `SET_${counterName}`:
-        return { ...state, ...update };
       case `LOADING_${counterName}`:
-        return { ...state, ...update };
       case `ERROR_${counterName}`:
         return { ...state, ...update };
       case `ADD_${counterName}`:
-        return [...state, update.marker];
+        return { ...state, markers: [...state.markers, marker] };
       case `REMOVE_${counterName}`:
-        return state.filter(item => item !== action.marker); // eslint-disable-line
-      case `UPDATE_${counterName}`:
-        const newState = [...state]; // eslint-disable-line
-        newState[0].y = 17.038538;
-        newState[0].x = 51.107883;
-        return newState;
+        return { ...state, markers: state.markers.filter(item => item !== marker) };
       default:
         return state;
     }

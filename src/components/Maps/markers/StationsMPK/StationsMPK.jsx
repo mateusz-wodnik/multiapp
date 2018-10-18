@@ -5,7 +5,6 @@ import Marker from '../../../../modules/Map/components/Marker/Marker';
 import styles from './StationsMPK.module.sass';
 import Layer from '../../../../modules/Map/components/Layer/Layer';
 import * as actions from './actions';
-import stations from './stations.data';
 
 class StationsMPK extends Component {
   componentDidMount() {
@@ -15,23 +14,18 @@ class StationsMPK extends Component {
 
   render() {
     const { markers } = this.props;
-    // return markers.map((item, idx) => idx < 50 ? (
-    //   <Marker key={item.name + idx} coordinates={[item.y, item.x]}>
-    //     <span className={styles.marker}>x</span>
-    //   </Marker>
-    // ) : null);
-    return <Layer features={stations} />;
+    return <Layer id="stations" features={markers} icon="/station.png" iconSize={0.6} />;
   }
 }
 
 StationsMPK.defaultProps = {
   setMarkersRequest: () => null,
-  markers: [],
+  markers: {},
 };
 
 StationsMPK.propTypes = {
   setMarkersRequest: PropTypes.func,
-  markers: PropTypes.arrayOf(PropTypes.object),
+  markers: PropTypes.objectOf(PropTypes.any),
 };
 
 const mapStateToProps = state => ({

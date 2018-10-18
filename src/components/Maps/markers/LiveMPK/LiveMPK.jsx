@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Marker from '../../../../modules/Map/components/Marker/Marker';
 import styles from './LiveMPK.module.sass';
 import * as actions from './actions';
+import Layer from '../../../../modules/Map/components/Layer/Layer';
+import live from './live.data';
+import stations from '../StationsMPK/stations.data';
+import geoJSONParser from '../../../../_utils/geoJSONParser';
 
 class LiveMPK extends Component {
   componentDidMount() {
@@ -14,22 +18,19 @@ class LiveMPK extends Component {
 
   render() {
     const { markers } = this.props;
-    return markers.map((item, idx) => (
-      <Marker key={item.name + idx} coordinates={[item.y, item.x]}>
-        <span className={`${styles.marker} ${styles[item.type]}`}>{item.name}</span>
-      </Marker>
-    ));
+    console.log('propsrrs', this.props)
+    return <Layer id="live" features={markers} icon="/bus-blue.png" iconSize={2} textField="name" />;
   }
 }
 
 LiveMPK.defaultProps = {
   setMarkersRequest: () => null,
-  markers: [],
+  markers: {},
 };
 
 LiveMPK.propTypes = {
   setMarkersRequest: PropTypes.func,
-  markers: PropTypes.arrayOf(PropTypes.object),
+  markers: PropTypes.objectOf(PropTypes.object),
 };
 
 const mapStateToProps = state => ({

@@ -15,8 +15,8 @@ class Maps extends Component {
     const { mpk } = this.state;
     return (
       <Map>
-        <LiveMPK />
         <StationsMPK />
+        <LiveMPK />
         <SearchBox />
       </Map>
     );

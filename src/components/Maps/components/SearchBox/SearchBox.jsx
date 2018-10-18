@@ -1,15 +1,21 @@
 import React from 'react';
 import connect from 'react-redux/es/connect/connect';
+import PropTypes from 'prop-types';
 import styles from './SearchBox.module.sass';
 import bs from '../../../../styles/bootstrap.module.css';
 import GooglePlaces from '../../../../modules/GoogleWrapper/services/GooglePlaces/GooglePlaces';
 import GoogleWrapper from '../../../../modules/GoogleWrapper/GoogleWrapper';
-import * as actions from './actions';
+import { setPlace } from './actions';
 
-const SearchBox = ({ service, onChange, ref, setPlace }) => (
+const SearchBox = ({
+  service,
+  onChange,
+  ref,
+  setPlace,
+}) => (
   <div className={`${styles.container} ${bs['input-group']}`}>
     <div className={bs['input-group-prepend']}>
-      <span className={bs['input-group-text']} id="basic-addon1">G</span>
+      <span className={bs['input-group-text']} id="googleAttribution">G</span>
     </div>
     <GoogleWrapper>
       <GooglePlaces listnerCallback={setPlace}>
@@ -19,7 +25,7 @@ const SearchBox = ({ service, onChange, ref, setPlace }) => (
           name="place"
           placeholder="Search place"
           aria-label="Search place"
-          aria-describedby="basic-addon1"
+          aria-describedby="googleAttribution"
           disabled={!service}
           onChange={onChange}
           ref={ref}
@@ -29,9 +35,23 @@ const SearchBox = ({ service, onChange, ref, setPlace }) => (
   </div>
 );
 
+SearchBox.defaultProps = {
+  setPlace: () => null,
+  service: false,
+  onChange: () => null,
+  ref: null,
+};
+
+SearchBox.propTypes = {
+  setPlace: PropTypes.func,
+  service: PropTypes.bool,
+  onChange: PropTypes.func,
+  ref: PropTypes.node,
+};
+
 const mapStateToProps = state => ({
   ...state.place,
   service: state.googleMapsService.service,
 });
 
-export default connect(mapStateToProps, { ...actions })(SearchBox);
+export default connect(mapStateToProps, { setPlace })(SearchBox);

@@ -1,54 +1,101 @@
-/* eslint-disable */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { MapConsumer } from '../../Map';
 
 class Layer extends Component {
-  componentDidMount() {
-    const { map } = this.props;
-    console.log(this.props)
+  componentDidMount() { //eslint-disable-line
+    const { map, icon } = this.props;
+    if (map && icon) {
+      return this.addIcon(map, icon)
+        .then(() => this.addLayer(map))
+        .catch(console.error);
+    }
+    if (map) this.addLayer(map);
   }
 
-  componentDidUpdate(prevProps) {
-    const { map } = this.props;
-    console.log(this.props)
+  componentDidUpdate(prevProps) { //eslint-disable-line
+    const {
+      map,
+      features,
+      id,
+      icon,
+    } = this.props;
     if (prevProps.map !== map) {
-      console.log(this.props)
-      this.addIcon(map)
+      if (icon) {
+        return this.addIcon(map, icon)
+          .then(() => this.addLayer(map))
+          .catch(console.error);
+      }
+      this.addLayer(map);
+    }
+    if (map && prevProps.features !== features) {
+      map.getSource(id).setData(features);
     }
   }
 
-  addIcon = (map) => {
-    map.loadImage('/station.png', (error, image) => {
-      if (error) throw error;
-      map.addImage('station', image);
-      this.addLayer(map)
-    });
-  }
+  addIcon = (map, icon) => (
+    new Promise((resolve, reject) => {
+      map.loadImage(icon, (error, image) => {
+        if (error) reject(error);
+        map.addImage(icon, image);
+        resolve(true);
+      });
+    })
+  );
 
   addLayer = (map) => {
-    const { features } = this.props;
-    console.log(features);
+    const {
+      id,
+      features,
+      icon,
+      iconSize = 1,
+      textField = '',
+      textSize = 10,
+    } = this.props;
+    const placeholder = {
+      type: 'FeatureCollection',
+      features: [],
+    };
+    const data = features.type ? features : placeholder;
+    map.addSource(id, { type: 'geojson', data });
     map.addLayer({
-      "id": "points",
-      "type": "symbol",
-      "source": {
-        "type": "geojson",
-        "data": features
+      id,
+      type: 'symbol',
+      source: id,
+      layout: {
+        'icon-image': icon,
+        'icon-size': iconSize,
+        'text-field': textField ? `{${textField}}` : '',
+        'text-size': textSize,
+        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        'text-offset': [0, 1],
+        'text-anchor': 'top',
       },
-      "layout": {
-        "icon-image": "station",
-        "icon-size": 0.75,
-        // "text-field": "{name}",
-        // "text-size": 8,
-        // "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-        // "text-offset": [0, 2],
-        // "text-anchor": "top"
-      }
     });
   };
 
   render = () => null;
 }
+
+Layer.defaultProps = {
+  map: undefined,
+  id: '',
+  features: undefined,
+  icon: '',
+  iconSize: 1,
+  textField: '',
+  textSize: 10,
+};
+
+Layer.propTypes = {
+  map: PropTypes.objectOf(PropTypes.object),
+  id: PropTypes.string,
+  features: PropTypes.objectOf(PropTypes.any),
+  icon: PropTypes.string,
+  iconSize: PropTypes.number,
+  textField: PropTypes.string,
+  textSize: PropTypes.number,
+};
 
 export default React.forwardRef((props, ref) => (
   <MapConsumer>

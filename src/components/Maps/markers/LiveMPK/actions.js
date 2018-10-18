@@ -1,5 +1,6 @@
 import live from './live.data';
 import MPKWroclawAPI from '../../../../APIS/MPKWroclawAPI';
+import geoJSONParser from '../../../../_utils/geoJSONParser';
 
 export const SET_MPK = 'SET_MPK';
 export const LOADING_MPK = 'LOADING_MPK';
@@ -10,45 +11,36 @@ export const UPDATE_MPK = 'UPDATE_MPK';
 
 const API = new MPKWroclawAPI();
 
-export const setMarkers = markers => ({
+export const set = markers => ({
   type: SET_MPK,
   loading: false,
   markers,
 });
 
-export const loadingMarkers = () => ({
+export const loading = () => ({
   type: LOADING_MPK,
   loading: true,
   error: null,
 });
 
-export const errorMarkers = error => ({
+export const error = message => ({
   type: ERROR_MPK,
   loading: false,
-  error,
+  error: message,
 });
 
 export const setMarkersRequest = (...ids) => (
   (dispatch) => {
-    dispatch(loadingMarkers());
+    dispatch(loading());
     API.getPosition(...ids)
-      .then(markers => dispatch(setMarkers(live)))
-      .catch(error => dispatch(setMarkers(live)));
+      .then((markers) => {
+        const features = geoJSONParser(live, 'x', 'y');
+        dispatch(set(features));
+      })
+      .catch(error => {
+        const features = geoJSONParser(live, 'x', 'y');
+        dispatch(set(features));
+      });
       // .catch(error => dispatch(errorMarkers(error.message))); // TODO: fix API due to cors error
   }
 );
-
-export const addMarker = marker => ({
-  type: ADD_MPK,
-  marker,
-});
-
-export const removeMarker = marker => ({
-  type: REMOVE_MPK,
-  marker,
-});
-
-export const updateMarker = marker => ({
-  type: UPDATE_MPK,
-  marker,
-});
