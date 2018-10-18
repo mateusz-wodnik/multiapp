@@ -35,8 +35,8 @@ Weather.defaultProps = {
 };
 
 Weather.propTypes = {
-  wind: PropTypes.objectOf(PropTypes.string),
-  main: PropTypes.objectOf(PropTypes.string),
+  wind: PropTypes.objectOf(PropTypes.any),
+  main: PropTypes.objectOf(PropTypes.any),
   weather: PropTypes.arrayOf(PropTypes.object),
   setWeatherRequest: PropTypes.func,
 };
