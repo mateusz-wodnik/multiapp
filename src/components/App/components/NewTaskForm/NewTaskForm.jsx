@@ -26,7 +26,7 @@ class NewTaskForm extends Component {
   render() {
     const { styles, toggleForm } = this.props;
     return createPortal(
-      <form className={styles.formContainer} onSubmit={this.handleForm}>
+      <form className={`${styles.formContainer} ${bs.container}`} onSubmit={this.handleForm}>
         <button type="button" className={styles.close} onClick={toggleForm}>X</button>
         <input
           type="text"

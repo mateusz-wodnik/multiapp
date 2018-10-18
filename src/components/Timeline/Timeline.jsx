@@ -34,7 +34,6 @@ const Timeline = ({ tasks }) => {
     const time = timeParser(new Date(date));
     return `${time.hours}:${time.minutes}`;
   };
-  data.list.forEach(item => console.log(new Date(item.dt * 1000).getHours() - 1));
   return (
     <article className={styles.container}>
       {/* <span className={styles.line} /> */}

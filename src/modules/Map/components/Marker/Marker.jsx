@@ -8,7 +8,8 @@ import { MapConsumer } from '../../Map';
 
 class Marker extends Component {
   componentDidMount() {
-    this.createMarker();
+    const { map } = this.props;
+    map && this.createMarker();
   }
 
   componentDidUpdate(prevProps) {

@@ -40,6 +40,7 @@ class Map extends Component {
     });
     map.on('load', () => {
       this.setState({ map }, () => this.setCurrentPosition(this.state.map)); // eslint-disable-line
+      // map.querySourceFeatures(sourceID, parameters)
     });
   }
 
