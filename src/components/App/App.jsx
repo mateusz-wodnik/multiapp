@@ -10,6 +10,7 @@ import Weather from '../Weather/Weather';
 import Timeline from '../Timeline/Timeline';
 import Maps from '../Maps/Maps';
 import { Route, Switch } from 'react-router-dom';
+import Navigation from '../Navigation/Navigation';
 
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
     <Route path="/overview" component={Timeline} />
     <Route path="/(overview|tasks-list)/" component={TasksManager} />
     <Route path="/maps" component={Maps} />
+    <Navigation />
       {/* MODALS */}
     <Modal styles={styles} />
   </div>
