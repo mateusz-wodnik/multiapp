@@ -32,7 +32,7 @@ class Map extends Component {
     ];
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
-      style: customStyle(location.origin, location.pathname), // eslint-disable-line
+      style: customStyle(location.origin, '/'), // eslint-disable-line
       center: [17.038538, 51.107883],
       zoom: 14,
       maxZoom: 14,

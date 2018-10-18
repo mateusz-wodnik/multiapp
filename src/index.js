@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/bootstrap-reboot.css';
 import './styles/global.sass';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -15,7 +16,9 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <Route path="/" component={App} />
+    </BrowserRouter>
   </Provider>, document.getElementById('root'),
 );
 
