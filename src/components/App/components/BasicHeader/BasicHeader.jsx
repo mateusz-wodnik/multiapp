@@ -16,7 +16,7 @@ class BasicHeader extends Component {
   render() {
     const { isFormOpened } = this.state;
     return (
-      <header className={`${styles.container}`}>
+      <header className={`${styles.container} ${bs.container}`}>
         <DateInfo styles={styles} />
         <button
           type="button"

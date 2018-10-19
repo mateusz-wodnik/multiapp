@@ -51,7 +51,7 @@ class Filters extends Component {
             aria-checked={filters.includes(filter)}
             onClick={e => this.handleButtons(e, filter)}
           >
-            {filter}
+            <span>{filter}</span>
           </button>
         ))}
       </section>

@@ -2,6 +2,8 @@
   display: grid
   grid-template: auto / 1fr 1fr 1fr
   grid-template-areas: 'info temperature icon'
+  padding: 0 15px
+  background: var(--first)
 .wind
   grid-area: info
 .temperature
@@ -17,7 +19,9 @@
   grid-area: info
   display: flex
   flex-flow: column
-  .date
-    order: -1
-  .clock
-    font-size: 1.2em
+.day
+  text-transform: capitalize
+.date
+  order: -1
+.clock
+  font-size: 1.2em

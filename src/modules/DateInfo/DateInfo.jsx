@@ -30,7 +30,7 @@ class DateInfo extends Component {
       <div className={styles.dateInfo}>
         <time className={styles.day}>{dayTablePL[day - 1]}</time>
         <Clock className={styles.clock} />
-        <time className={styles.date} dateTime={`${year}-${month}-${day}`}>{`${day}/${month}/${year}`}</time>
+        <time className={styles.date} dateTime={`${year}-${month}-${day}`}>{`${day}-${month}-${year}`}</time>
         {children}
       </div>
     );

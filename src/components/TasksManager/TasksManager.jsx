@@ -1,15 +1,15 @@
 import React from 'react';
-// import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './TasksManager.module.sass';
 import List from './components/List/List';
 import Filters from './components/Filters/Filters';
+import bs from '../../styles/bootstrap.module.css';
 
 
 const TasksManager = () => (
-  <header className={`${styles.container}`}>
+  <article id="taskManager" className={`${styles.container} ${bs.container}`}>
     <Filters />
     <List />
-  </header>
+  </article>
 );
 
 export default TasksManager; // eslint-disable-line

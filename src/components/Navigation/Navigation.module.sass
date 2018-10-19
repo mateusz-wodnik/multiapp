@@ -1,14 +1,18 @@
 .container
   display: flex
   margin-top: auto
+  position: sticky
+  bottom: 0
+  padding: 0
 .link
-  border: 3px solid black
-  min-height: 80px
+  border: 1px solid black
+  min-height: 50px
   display: flex
   justify-content: center
   align-items: center
   flex: 1
-  background: grey
-  color: black
+  background: var(--fourth)
+  color: var(--fifth)
 .active
-  filter: brightness(1.4)
+  filter: brightness(1.5)
+  color: var(--third)

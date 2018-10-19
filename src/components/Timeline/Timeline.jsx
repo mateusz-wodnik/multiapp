@@ -1,64 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
 // import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Timeline.module.sass';
 import timeParser from '../../_utils/timeParser';
 import data from './forecast.data';
+import bs from '../../styles/bootstrap.module.css';
+import { setForecastRequest } from '../Weather/actions';
 
-const setWeather = (hour) => {
-  if (hour > 21) {
-    return data.list[12];
-  } else if (hour > 18) { // eslint-disable-line
-    return data.list[11];
-  } else if (hour > 15) {
-    return data.list[10];
-  } else if (hour > 15) {
-    return data.list[9];
-  } else if (hour > 12) {
-    return data.list[8];
-  } else if (hour > 9) {
-    return data.list[7];
-  } else if (hour > 6) {
-    return data.list[6];
-  } else if (hour > 3) {
-    return data.list[5];
-  } else if (hour >= 0) {
-    return data.list[4];
+class Timeline extends Component {
+  componentDidMount() {
+    const { setForecastRequest } = this.props;
+    setForecastRequest();
   }
-  return 'No weather data';
-};
 
-const Timeline = ({ tasks }) => {
-  const timeToString = (date) => {
+  timeToString = (date) => {
     const time = timeParser(new Date(date));
     return `${time.hours}:${time.minutes}`;
   };
-  return (
-    <article className={styles.container}>
-      {/* <span className={styles.line} /> */}
-      {tasks.map(task => (
-        <div key={task._id} className={styles.item}>
-          <span className={styles.title}>{task.title}</span>
-          <span className={styles.time}>{timeToString(task.date)}</span>
-          <img src={`http://openweathermap.org/img/w/${setWeather(task.date.getHours()).weather[0].icon}.png`} className={styles.weather} alt="icon" />
-        </div>
-      ))}
-    </article>
-  );
-};
+
+  render() {
+    const { timeline } = this.props;
+    return (
+      <article className={`${styles.container} ${bs.container}`}>
+        {/* <span className={styles.line} /> */}
+        {timeline.map(task => (
+          <div key={task._id} className={styles.item}>
+            {!task.icon && <span className={styles.title}>{task.title}</span>}
+            {task.icon && (
+              <img
+                src={`http://openweathermap.org/img/w/${task.icon}.png`}
+                className={styles.weather}
+                alt="icon"
+              />
+            )}
+            <span className={styles.time}>{this.timeToString(task.date)}</span>
+          </div>
+        ))}
+      </article>
+    );
+  }
+}
 
 Timeline.defaultProps = {
-  tasks: [],
+  timeline: [],
 };
 
 Timeline.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object),
+  timeline: PropTypes.arrayOf(PropTypes.object),
 };
 
+const createTimeline = (tasks, forecast) => (
+  [...tasks, ...forecast].sort((a, b) => (
+    a.date.getTime() - b.date.getTime()
+  ))
+);
 
 const mapStateToProps = state => ({
   tasks: state.taskManager.list,
+  forecast: state.weather.forecast,
+  timeline: createTimeline(state.taskManager.list, state.weather.forecast.items),
 });
 
-export default connect(mapStateToProps)(Timeline);
+export default connect(mapStateToProps, { setForecastRequest })(Timeline);

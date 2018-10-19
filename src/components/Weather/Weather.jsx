@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-// import bs from 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import styles from './Weather.module.sass';
 import DateInfo from '../../modules/DateInfo/DateInfo';
 import * as actions from './actions';
+import bs from '../../styles/bootstrap.module.css';
 
 class Weather extends Component {
   componentDidMount() {
@@ -13,15 +13,23 @@ class Weather extends Component {
   }
 
   render() {
-    const { wind, main, weather } = this.props;
+    const {
+      wind,
+      temp,
+      icon,
+      main,
+    } = this.props;
     return (
-      <header className={styles.container}>
+      <header className={`${styles.container} ${bs.container}`}>
         <DateInfo styles={styles}>
           <span className={styles.wind}>{`${wind.speed} m/s`}</span>
         </DateInfo>
-        <h4 className={styles.temperature}>{`${main.temp}℃`}</h4>
-        <img src={`http://openweathermap.org/img/w/${weather[0].icon}.png`} alt={weather[0].main}
-             className={styles.icon}/>
+        <h4 className={styles.temperature}>{`${temp}℃`}</h4>
+        <img
+          src={`http://openweathermap.org/img/w/${icon}.png`}
+          alt={main}
+          className={styles.icon}
+        />
       </header>
     );
   }
@@ -29,20 +37,32 @@ class Weather extends Component {
 
 Weather.defaultProps = {
   wind: {},
-  main: {},
-  weather: [{}],
+  icon: '',
+  main: '',
+  dt: 1539905400,
+  temp: 8,
+  pressure: 1022,
+  humidity: 93,
+  temp_min: 8,
+  temp_max: 8,
   setWeatherRequest: () => null,
 };
 
 Weather.propTypes = {
   wind: PropTypes.objectOf(PropTypes.any),
-  main: PropTypes.objectOf(PropTypes.any),
-  weather: PropTypes.arrayOf(PropTypes.object),
+  icon: PropTypes.string,
+  main: PropTypes.string,
+  dt: PropTypes.number,
+  temp: PropTypes.number,
+  pressure: PropTypes.number,
+  humidity: PropTypes.number,
+  temp_min: PropTypes.number,
+  temp_max: PropTypes.number,
   setWeatherRequest: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
-  ...state.weather,
+  ...state.weather.actual,
 });
 
 export default connect(mapStateToProps, { ...actions })(Weather);

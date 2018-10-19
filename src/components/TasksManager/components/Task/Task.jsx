@@ -13,8 +13,7 @@ const Task = ({
     <div className={styles.container}>
       <header className={styles.header}>
         <h4 className={styles.title}>{title}</h4>
-        <time>{`${time.hours}:${time.minutes}`}</time>
-        <button className={`${bs.btn} ${bs['btn-danger']}`} type="button" onClick={() => removeTask({ _id })}>✖</button>
+        <time className={`${styles.time} ${bs.badge} ${bs['badge-pill']} ${bs['badge-info']}`}>{`${time.hours}:${time.minutes}`}</time>
       </header>
       {/* Todo: content should be visible only on specific task page */}
       {open && (

@@ -63,7 +63,7 @@ class NewTaskForm extends Component {
           <div className={`${bs['input-group-prepend']}`}>
             <span className={`${bs['input-group-text']}`}>Set time</span>
           </div>
-          <input type="time" className={bs['form-control']} name="time" defaultValue={new Date()} />
+          <input type="time" className={bs['form-control']} name="time" defaultValue="12:00" />
         </div>
         <div className={bs['input-group']}>
           <input className={`${bs.btn} ${bs['btn-danger']} ${bs['form-control']}`} placeholder="Reset" type="reset" />

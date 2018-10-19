@@ -1,6 +1,7 @@
 .container
   display: flex
   justify-content: space-between
+  padding: 0
 .open
   grid-area: open
   font-size: 1.6em
@@ -29,8 +30,14 @@
   grid-template-areas: 'day clock open' 'day date open'
 .day
   font-size: 2em
+  text-transform: capitalize
   grid-area: day
+  margin: 5px 20px
 .clock
   grid-area: clock
+  align-self: end
+  justify-self: end
 .date
   grid-area: date
+  align-self: start
+  justify-self: end

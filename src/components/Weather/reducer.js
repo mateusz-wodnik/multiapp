@@ -1,16 +1,7 @@
-import {
-  SET_WEATHER,
-} from './actions';
+import { combineReducers } from 'redux';
+import WeatherReducer from './ReducerCreator';
 
-export const initialState = {};
-
-function weather(state = initialState, action) {
-  switch (action.type) {
-    case SET_WEATHER:
-      return action.weather;
-    default:
-      return state;
-  }
-}
-
-export default weather;
+export default combineReducers({
+  actual: WeatherReducer('ACTUAL'),
+  forecast: WeatherReducer('FORECAST'),
+});

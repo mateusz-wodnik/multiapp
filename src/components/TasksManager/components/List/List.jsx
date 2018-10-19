@@ -16,7 +16,11 @@ export class List extends Component {
     const { tasks, removeTaskRequest } = this.props;
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
-        {tasks.map(task => <li key={task._id} className={`${styles.item} ${bs['list-group-item']}`}><Task {...task} removeTask={removeTaskRequest} /></li>)} {/*eslint-disable-line*/}
+        {tasks.map(task => (
+          <li key={task._id} className={`${styles.item} ${bs['list-group-item']}`}>
+            <Task {...task} removeTask={removeTaskRequest} />
+          </li>
+        ))}
       </ul>
     );
   }

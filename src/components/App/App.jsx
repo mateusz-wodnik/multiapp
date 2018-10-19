@@ -14,8 +14,8 @@ import Navigation from '../Navigation/Navigation';
 
 
 const App = () => (
-  <div className={`${bs.container} ${styles.container}`}>
-    <Route path="/(maps|tasks-list)/" component={BasicHeader} />
+  <div className={`${styles.container}`}>
+    <Route path="/(tasks-list)/" component={BasicHeader} />
     {/*TODO: Add Home component and route*/}
     {/*TODO: Add TasksList component and route*/}
     <Route path="/overview" component={Weather} />
