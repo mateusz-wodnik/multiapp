@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { set, del, Store } from 'idb-keyval';
 import uuidv4 from 'uuid/v4';
+import moment from 'moment';
 import dateParser from '../../../../_utils/dateParser';
 import TaskModel from './Task.model';
 
@@ -18,8 +19,8 @@ Store.prototype.getAll = function (collectionName) {
     ));
 };
 
-const act = dateParser(new Date());
-const tasksStore = new Store(`${act.day}-${act.month}-${act.year}`, 'tasks');
+const actualDate = moment().format('DD-MM-YYYY');
+const tasksStore = new Store(actualDate, 'tasks');
 
 export const SET_LIST = 'SET_LIST';
 export const ADD_TASK = 'ADD_TASK';

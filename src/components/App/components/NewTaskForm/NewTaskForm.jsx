@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { createPortal } from 'react-dom';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
@@ -57,13 +58,13 @@ class NewTaskForm extends Component {
           <div className={`${bs['input-group-prepend']}`}>
             <span className={`${bs['input-group-text']}`}>Set date</span>
           </div>
-          <input type="date" className={bs['form-control']} name="date" defaultValue={new Date()} />
+          <input type="date" className={bs['form-control']} name="date" defaultValue={moment().format('YYYY-MM-DD')} />
         </div>
         <div className={`${bs['input-group']}`}>
           <div className={`${bs['input-group-prepend']}`}>
             <span className={`${bs['input-group-text']}`}>Set time</span>
           </div>
-          <input type="time" className={bs['form-control']} name="time" defaultValue="12:00" />
+          <input type="time" className={bs['form-control']} name="time" defaultValue={moment().format('HH:mm')} />
         </div>
         <div className={bs['input-group']}>
           <input className={`${bs.btn} ${bs['btn-danger']} ${bs['form-control']}`} placeholder="Reset" type="reset" />
