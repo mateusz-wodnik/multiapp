@@ -1,9 +1,25 @@
+.container
+  cursor: pointer
 .header
   display: flex
+  flex-flow: row wrap
   justify-content: space-between
   align-items: center
   color: var(--fourth)
+  background: var(--second)
+  border: 3px solid var(--first)
 .time
   font-size: 1em
   background: var(--fourth)
   color: var(--second)
+
+.categories, .tags
+  display: flex
+  overflow: auto
+  padding: 0
+  width: 100%
+.category, .tag
+  margin-right: 5px
+
+.opened
+  cursor: initial

@@ -1,40 +1,67 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import bs from '../../../../styles/bootstrap.module.css';
 import styles from './Task.module.sass';
 
 
-const Task = ({
-  title,
-  date,
-  description,
-  tags,
-  categories,
-  open,
-  removeTask,
-  _id,
-}) => (
-  <div className={styles.container}>
-    <header className={styles.header}>
-      <h4 className={styles.title}>{title}</h4>
-      <time className={`${styles.time} ${bs.badge} ${bs['badge-pill']} ${bs['badge-info']}`}>{moment(date).format('HH:mm')}</time>
-    </header>
-    {/* Todo: content should be visible only on specific task page */}
-    {open && (
-      <div className={styles.content}>
-        <p>{description}</p>
-        <h5>Tags:</h5>
-        <ul className={styles.tags}>
-          {tags.map(tag => <li>{tag}</li>)}
-        </ul>
-        <h5>Categories:</h5>
-        <ul className={styles.categories}>
-          {categories.map(category => <li>{category}</li>)}
-        </ul>
-      </div>)}
-  </div>
-);
+class Task extends Component {
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
+
+  render() {
+    const {
+      title,
+      date,
+      description,
+      tags,
+      categories,
+      removeTask,
+      _id,
+    } = this.props;
+    const { open } = this.state;
+    return (
+      <div className={`${styles.container} ${bs.card}`} onClick={this.handleOpen}>
+        <header className={`${styles.header} ${bs['card-header']}`}>
+          <h4 className={styles.title}>{title}</h4>
+          <time className={`${styles.time} ${bs.badge} ${bs['badge-pill']} ${bs['badge-info']}`}>
+            {moment(date).format('HH:mm')}
+          </time>
+          <ul className={styles.categories}>
+            {categories.map(category => (
+              <li className={`${bs.badge} ${bs['badge-info']} ${styles.category}`}>{category}</li>
+            ))}
+          </ul>
+        </header>
+        {/* Todo: content should be visible only on specific task page */}
+        {open && (
+          <Fragment>
+            <div className={`${styles.content} ${bs['card-body']}`}>
+              <p className={bs['card-text']}>{description}</p>
+            </div>
+            {!!tags.length && (
+              <div className={bs['card-footer']}>
+                <ul className={styles.tags}>
+                  {tags.map(tag => (
+                    <li className={`${bs.badge} ${bs['badge-info']} ${styles.tag}`}>
+                      #
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Fragment>
+        )}
+      </div>
+    );
+  }
+}
 
 Task.defaultProps = {
   title: '',

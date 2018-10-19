@@ -17,8 +17,8 @@ export class List extends Component {
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
         {tasks.map(task => (
-          <li key={task._id} className={`${styles.item} ${bs['list-group-item']}`}>
-            <Task {...task} removeTask={removeTaskRequest} />
+          <li key={task._id} className={`${styles.item}`}>
+            <Task {...task} open={true} removeTask={removeTaskRequest} />
           </li>
         ))}
       </ul>
