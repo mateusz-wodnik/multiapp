@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
-import timeParser from '../../_utils/timeParser';
 
 class Clock extends Component {
   state = {
-    hours: '',
-    minutes: '',
-    seconds: '',
+    time: moment(),
   };
 
   componentDidMount() {
@@ -19,8 +17,7 @@ class Clock extends Component {
 
   startClock = () => {
     this.clock = setInterval(() => {
-      const act = new Date();
-      this.setState(timeParser(act));
+      this.setState({ time: moment() });
     }, 1000);
   };
 
@@ -29,9 +26,9 @@ class Clock extends Component {
   };
 
   render() {
-    const { hours, minutes, seconds } = this.state;
+    const { time } = this.state;
     const { className } = this.props;
-    return <time className={className}>{`${hours}:${minutes}:${seconds}`}</time>;
+    return <time className={className}>{time.format('HH:mm:ss')}</time>;
   }
 }
 

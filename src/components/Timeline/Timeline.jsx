@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
-// import bs from 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Timeline.module.sass';
-import timeParser from '../../_utils/timeParser';
-import data from './forecast.data';
 import bs from '../../styles/bootstrap.module.css';
 import { setForecastRequest } from '../Weather/actions';
 
@@ -14,16 +12,11 @@ class Timeline extends Component {
     setForecastRequest();
   }
 
-  timeToString = (date) => {
-    const time = timeParser(new Date(date));
-    return `${time.hours}:${time.minutes}`;
-  };
-
   render() {
     const { timeline } = this.props;
     return (
       <article className={`${styles.container} ${bs.container}`}>
-        {/* <span className={styles.line} /> */}
+         {/*<span className={styles.line} />*/}
         {timeline.map(task => (
           <div key={task._id} className={styles.item}>
             {!task.icon && <span className={styles.title}>{task.title}</span>}
@@ -34,7 +27,7 @@ class Timeline extends Component {
                 alt="icon"
               />
             )}
-            <span className={styles.time}>{this.timeToString(task.date)}</span>
+            <span className={styles.time}>{moment(task.date).format('HH:mm')}</span>
           </div>
         ))}
       </article>
@@ -52,7 +45,7 @@ Timeline.propTypes = {
 
 const createTimeline = (tasks, forecast) => (
   [...tasks, ...forecast].sort((a, b) => (
-    a.date.getTime() - b.date.getTime()
+    moment(a.date) - moment(b.date)
   ))
 );
 

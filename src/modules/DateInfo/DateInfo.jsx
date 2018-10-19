@@ -1,36 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import bs from 'bootstrap/dist/css/bootstrap.min.css';
+import moment from 'moment';
 import Clock from '../Clock/Clock';
-import dateParser from '../../_utils/dateParser';
 
 class DateInfo extends Component {
   state = {
-    day: '',
-    month: '',
-    year: '',
-    dayTablePL: [],
+    time: moment(),
+    dayTable: [
+      '',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+      'sunday',
+    ],
   };
 
   componentDidMount() {
-    this.setDate();
+    this.setState({ time: moment() });
   }
 
-  setDate = () => {
-    const act = new Date();
-    this.setState(dateParser(act));
-  };
-
   render() {
-    const {
-      day, month, year, dayTablePL,
-    } = this.state;
+    const { dayTable, time } = this.state;
     const { styles, children } = this.props;
     return (
       <div className={styles.dateInfo}>
-        <time className={styles.day}>{dayTablePL[day - 1]}</time>
+        <time className={styles.day}>{dayTable[time.day()]}</time>
         <Clock className={styles.clock} />
-        <time className={styles.date} dateTime={`${year}-${month}-${day}`}>{`${day}-${month}-${year}`}</time>
+        <time className={styles.date} dateTime={time.format('YYYY-MM-DD')}>{time.format('LL')}</time>
         {children}
       </div>
     );
