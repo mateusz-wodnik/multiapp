@@ -13,12 +13,12 @@ export class List extends Component {
   }
 
   render() {
-    const { tasks, removeTaskRequest } = this.props;
+    const { tasks, allCategories, removeTaskRequest, updateTaskRequest } = this.props;
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
         {tasks.map(task => (
           <li key={task._id} className={`${styles.item}`}>
-            <Task {...task} open={true} removeTask={removeTaskRequest} />
+            <Task {...task} updateTaskRequest={updateTaskRequest} allCategories={allCategories} removeTask={removeTaskRequest} />
           </li>
         ))}
       </ul>
@@ -29,12 +29,14 @@ export class List extends Component {
 List.defaultProps = {
   setListRequest: () => null,
   tasks: [],
+  allCategories: [],
   removeTaskRequest: () => null,
 };
 
 List.propTypes = {
   setListRequest: PropTypes.func,
   tasks: PropTypes.arrayOf(PropTypes.object),
+  allCategories: PropTypes.arrayOf(PropTypes.string),
   removeTaskRequest: PropTypes.func,
 };
 
@@ -46,6 +48,7 @@ const handleFilter = (list, filters) => (
 
 const mapStateToProps = state => ({
   tasks: handleFilter(state.taskManager.list, state.taskManager.filters),
+  allCategories: state.taskManager.categories,
 });
 
 export default connect(mapStateToProps, { ...actions })(List);

@@ -24,6 +24,7 @@ const tasksStore = new Store(actualDate, 'tasks');
 
 export const SET_LIST = 'SET_LIST';
 export const ADD_TASK = 'ADD_TASK';
+export const UPDATE_TASK = 'UPDATE_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
 
 export const setList = list => ({
@@ -54,15 +55,29 @@ export const addTaskRequest = task => (
   }
 );
 
-export const removeTask = task => ({
-  type: REMOVE_TASK,
+export const updateTask = task => ({
+  type: UPDATE_TASK,
   task,
 });
 
-export const removeTaskRequest = task => (
+export const updateTaskRequest = (_id, task) => (
   (dispatch) => {
-    del(task._id, tasksStore)
-      .then(() => dispatch(removeTask(task)))
+    const newTask = TaskModel(_id, task);
+    set(_id, newTask, tasksStore)
+      .then(() => dispatch(updateTask(newTask)))
+      .catch(console.error);
+  }
+);
+
+export const removeTask = _id => ({
+  type: REMOVE_TASK,
+  _id,
+});
+
+export const removeTaskRequest = _id => (
+  (dispatch) => {
+    del(_id, tasksStore)
+      .then(() => dispatch(removeTask(_id)))
       .catch(console.error);
   }
 );

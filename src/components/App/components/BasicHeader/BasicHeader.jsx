@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import bs from '../../../../styles/bootstrap.module.css';
 import styles from './BasicHeader.module.sass';
 import NewTaskForm from '../NewTaskForm/NewTaskForm';
@@ -25,6 +26,7 @@ class BasicHeader extends Component {
         >
           {isFormOpened ? '🖉' : '+'}
         </button>
+        <Link to="#config" className={`${bs.btn} ${bs['btn-danger']}`}>elo</Link>
         {isFormOpened && (
           <NewTaskForm toggleForm={this.toggleForm} styles={styles} />
         )}

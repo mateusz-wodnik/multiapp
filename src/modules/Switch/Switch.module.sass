@@ -1,0 +1,25 @@
+.container
+  --height: 20px
+  --width: calc(var(--height) * 2)
+  display: flex
+  border-radius: var(--height)
+  align-items: center
+  height: var(--height)
+  width: var(--width)
+  position: relative
+  border: 0
+  background: var(--second)
+.point
+  --size: calc(var(--height) * 0.7)
+  border-radius: 50%
+  height: var(--size)
+  width: var(--size)
+  background: var(--first)
+  transition: 0.25s
+  position: absolute
+  left: 10%
+  &.checked
+    background: var(--fourth)
+    transform: translateX(calc(var(--width) / 2 - 0px))
+
+

@@ -1,0 +1,35 @@
+.topBar
+  --height: 20px
+  height: 0
+  display: flex
+  justify-content: space-between
+  padding: 0
+  overflow: hidden
+  transition: 0.25s
+  width: 100%
+  background: var(--third)
+.opened
+  height: var(--height)
+.btn
+  display: flex
+  justify-content: center
+  align-items: center
+  border: 0
+  background: var(--second)
+  height: var(--height)
+  width: var(--height)
+  position: relative
+  padding: 0
+.remove
+  &:after, &:before
+    content: ''
+    position: absolute
+    width: var(--height)
+    height: 3px
+    background: var(--fourth)
+  &:after
+    transform: rotate(45deg)
+  &:before
+    transform: rotate(-45deg)
+.switchLabel
+  margin-left: auto

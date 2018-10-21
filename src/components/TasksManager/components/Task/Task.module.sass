@@ -1,25 +1,88 @@
 .container
-  cursor: pointer
 .header
-  display: flex
-  flex-flow: row wrap
+  display: grid
+  grid-template-rows: auto auto
+  grid-template-columns: auto auto
+  grid-template-areas: "title time" "categories categories"
+  align-items: start
   justify-content: space-between
-  align-items: center
   color: var(--fourth)
   background: var(--second)
   border: 3px solid var(--first)
+  position: relative
+  cursor: pointer
+  *
+    cursor: initial
+.toggle
+  cursor: pointer
+  position: absolute
+  width: 100%
+  --height: 15px
+  height: var(--height)
+  background: transparent
+  border: 0
+  &:after, &:before
+    content: ''
+    position: absolute
+    width: var(--height)
+    height: 3px
+    background: var(--fourth)
+  &:after
+    transform: rotate(45deg)
+.toggleTopbar
+  top: 0
+  &:before
+    transform: rotate(-45deg) translate(-7px, -7px)
+.toggleContent
+  bottom: 0
+  &:before
+    transform: rotate(-45deg) translate(7px, 7px)
+.title
+  grid-area: title
+  justify-self: start
+  border-radius: 10px
 .time
+  grid-area: time
+  justify-self: end
   font-size: 1em
   background: var(--fourth)
   color: var(--second)
+  border: 0
+  font-weight: 700
+  position: relative
+.timeEdit
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  appearance: none
+  opacity: 0
 
+.description
+  width: 100%
+
+.categories
+  grid-area: categories
+  align-self: end
+  justify-self: start
 .categories, .tags
   display: flex
   overflow: auto
   padding: 0
-  width: 100%
 .category, .tag
   margin-right: 5px
+  position: relative
 
-.opened
-  cursor: initial
+.checkbox
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  appearance: none
+  background: rgba(0,0,0,0.3)
+  &:checked
+    background: 0
+.editable
+  outline: 3px dashed rgba(0,0,0,0.2)
