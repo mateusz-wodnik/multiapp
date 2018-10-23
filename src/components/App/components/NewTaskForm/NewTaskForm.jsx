@@ -11,14 +11,19 @@ class NewTaskForm extends Component {
     e.preventDefault();
     const { addTaskRequest } = this.props;
     const {
-      title, date, time, description, categories,
+      title,
+      date: { valueAsDate: date },
+      time: { value: time },
+      description,
+      categories,
     } = e.target;
-    const dateString = `${date.value} ${time.value}`;
-    const dateObj = new Date(...dateString.split(/\D/));
+    const timeSplit = time.split(':');
+    const newDate = moment(date);
+    newDate.set({ h: timeSplit[0], m: timeSplit[1] });
     const task = {
       title: title.value,
       description: description.value,
-      date: dateObj,
+      date: newDate.toDate(),
       categories: [...categories.selectedOptions].map(option => option.value),
     };
     addTaskRequest(task);
