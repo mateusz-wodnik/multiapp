@@ -6,7 +6,7 @@ const TaskModel = (id, task) => {
     title = '',
     description = '',
     participiants = [], // TODO Implement add/remove users through server requests
-    address = '', // TODO Add place selectiot by map/search
+    place = '', // TODO Add place selectiot by map/search
     latitude = '', // TODO Add place selectiot by map/search
     longitude = '', // TODO Add place selectiot by map/search
     tags = [],
@@ -18,7 +18,7 @@ const TaskModel = (id, task) => {
     title,
     description,
     participiants, // TODO Implement add/remove users through server requests
-    address, // TODO Add place selectiot by map/search
+    place, // TODO Add place selectiot by map/search
     latitude, // TODO Add place selectiot by map/search
     longitude, // TODO Add place selectiot by map/search
     tags,

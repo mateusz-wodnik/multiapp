@@ -5,6 +5,10 @@ import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import bs from '../../../../styles/bootstrap.module.css';
 import * as actions from '../../../TasksManager/components/List/actions';
+import StationsMPK from '../../../Maps/layers/StationsMPK/StationsMPK';
+import LiveMPK from '../../../Maps/layers/LiveMPK/LiveMPK';
+import SearchBox from '../../../Maps/components/SearchBox/SearchBox';
+import Map from '../../../../modules/Map/Map';
 
 class NewTaskForm extends Component {
   handleForm = (e) => {
@@ -16,6 +20,7 @@ class NewTaskForm extends Component {
       time: { value: time },
       description,
       categories,
+      place: { dataset: { geoJSON: place } },
     } = e.target;
     const timeSplit = time.split(':');
     const newDate = moment(date);
@@ -25,6 +30,7 @@ class NewTaskForm extends Component {
       description: description.value,
       date: newDate.toDate(),
       categories: [...categories.selectedOptions].map(option => option.value),
+      place,
     };
     addTaskRequest(task);
   };
@@ -71,6 +77,9 @@ class NewTaskForm extends Component {
           </div>
           <input type="time" className={bs['form-control']} name="time" defaultValue={moment().format('HH:mm')} />
         </div>
+        <Map>
+          <SearchBox hide={true} />
+        </Map>
         <div className={bs['input-group']}>
           <input className={`${bs.btn} ${bs['btn-danger']} ${bs['form-control']}`} placeholder="Reset" type="reset" />
           <button className={`${bs.btn} ${bs['btn-success']} ${bs['form-control']}`} type="submit">Add</button>

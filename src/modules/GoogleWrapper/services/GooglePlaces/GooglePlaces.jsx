@@ -21,9 +21,14 @@ class GooglePlaces extends Component {
     }
   }
 
-  handleAutocomplete = (input) => {
+  handleSelect = (place) => {
     const { listnerCallback } = this.props;
-    GooglePlacesAPI.setAutocomplete(input, listnerCallback);
+    this.input.current.dataset.geoJSON = JSON.stringify(place);
+    listnerCallback(place);
+  };
+
+  handleAutocomplete = (input) => {
+    GooglePlacesAPI.setAutocomplete(input, this.handleSelect);
   };
 
   render() {
