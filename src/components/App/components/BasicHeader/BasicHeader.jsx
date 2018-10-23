@@ -26,7 +26,6 @@ class BasicHeader extends Component {
         >
           {isFormOpened ? '🖉' : '+'}
         </button>
-        <Link to="#config" className={`${bs.btn} ${bs['btn-danger']}`}>elo</Link>
         {isFormOpened && (
           <NewTaskForm toggleForm={this.toggleForm} styles={styles} />
         )}

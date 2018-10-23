@@ -5,10 +5,10 @@ import Filters from './components/Filters/Filters';
 import bs from '../../styles/bootstrap.module.css';
 
 
-const TasksManager = () => (
+const TasksManager = ({ allowEditing }) => (
   <article id="taskManager" className={`${styles.container} ${bs.container}`}>
     <Filters />
-    <List />
+    <List allowEditing={allowEditing} />
   </article>
 );
 

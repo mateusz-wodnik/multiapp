@@ -16,6 +16,7 @@ class Task extends Component {
     this.timeRef = createRef();
     this.descriptionRef = createRef();
     this.categoriesRef = createRef();
+    console.log(props)
   }
 
   state = {
@@ -25,7 +26,7 @@ class Task extends Component {
   };
 
   handleOpen = (e) => {
-    console.log(e.target)
+    console.log(e.target);
     if (e.target.localName !== 'header') return;
     this.setState(state => ({
       open: !state.open,
@@ -43,20 +44,14 @@ class Task extends Component {
         descriptionRef: { current: { textContent: description } },
         categoriesRef: { current: { childNodes: rawCategories } },
       } = this;
-      console.log(title);
-      console.log(time);
-      console.log(description);
+      const timeSplit = time.split(':');
       const categories = [];
-      [...rawCategories].forEach(li => {
+      [...rawCategories].forEach((li) => {
         const isChecked = li.children.category.checked;
         if (isChecked) categories.push(li.textContent);
       });
-      console.log(categories)
-      // console.log(categories.map())
-      // this.forceUpdate();
-      // const { addTaskRequest } = this.props;
       const newDate = moment(date);
-      newDate.set({ h: 11, m: 11 });
+      newDate.set({ h: timeSplit[0], m: timeSplit[1] });
       const task = {
         title,
         description,
@@ -65,14 +60,12 @@ class Task extends Component {
       };
       updateTaskRequest(_id, task);
     }
-    // setTimeout(() => {
     this.setState(state => ({
       ...state,
       editable: !state.editable,
-      topbarToggle: editable ? false : true,
-      open: editable ? false : true,
+      topbarToggle: !editable,
+      open: !editable,
     }));
-    // }, 1)
   };
 
   handleTopbarToggle = () => {
@@ -89,6 +82,7 @@ class Task extends Component {
       allCategories,
       removeTask,
       _id,
+      allowEditing,
     } = this.props;
     const { open, editable, topbarToggle } = this.state;
     const {
@@ -103,7 +97,15 @@ class Task extends Component {
     } = this;
     return (
       <div id={_id} className={`${styles.container} ${bs.card}`}>
-        <TopBar {...{ _id, removeTask, handleEditable, topbarToggle }} />
+        {allowEditing && (
+          <TopBar {...{
+            _id,
+            removeTask,
+            handleEditable,
+            topbarToggle,
+          }}
+          />
+        )}
         <Header
           {...{
             title,
@@ -136,6 +138,7 @@ Task.defaultProps = {
   open: false,
   _id: '',
   removeTask: () => null,
+  allowEditing: false,
 };
 
 Task.propTypes = {
@@ -148,6 +151,7 @@ Task.propTypes = {
   open: PropTypes.bool,
   _id: PropTypes.string,
   removeTask: PropTypes.func,
+  allowEditing: PropTypes.bool,
 };
 
 export default Task;

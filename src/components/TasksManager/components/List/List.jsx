@@ -13,12 +13,12 @@ export class List extends Component {
   }
 
   render() {
-    const { tasks, allCategories, removeTaskRequest, updateTaskRequest } = this.props;
+    const { tasks, allCategories, removeTaskRequest, updateTaskRequest, allowEditing } = this.props;
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
         {tasks.map(task => (
           <li key={task._id} className={`${styles.item}`}>
-            <Task {...task} updateTaskRequest={updateTaskRequest} allCategories={allCategories} removeTask={removeTaskRequest} />
+            <Task {...task} allowEditing={allowEditing} updateTaskRequest={updateTaskRequest} allCategories={allCategories} removeTask={removeTaskRequest} />
           </li>
         ))}
       </ul>
@@ -31,6 +31,7 @@ List.defaultProps = {
   tasks: [],
   allCategories: [],
   removeTaskRequest: () => null,
+  allowEditing: false,
 };
 
 List.propTypes = {
@@ -38,6 +39,7 @@ List.propTypes = {
   tasks: PropTypes.arrayOf(PropTypes.object),
   allCategories: PropTypes.arrayOf(PropTypes.string),
   removeTaskRequest: PropTypes.func,
+  allowEditing: PropTypes.bool,
 };
 
 const handleFilter = (list, filters) => (

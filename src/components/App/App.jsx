@@ -20,7 +20,8 @@ const App = () => (
     {/*TODO: Add TasksList component and route*/}
     <Route path="/overview" component={Weather} />
     <Route path="/overview" component={Timeline} />
-    <Route path="/(overview|tasks-list)/" component={TasksManager} />
+    <Route path="/tasks-list" render={() => <TasksManager allowEditing={true} />} />
+    <Route path="/overview"  component={TasksManager} />
     <Route path="/maps" component={Maps} />
     <Navigation />
       {/* MODALS */}

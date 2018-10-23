@@ -44,7 +44,7 @@ class NewTaskForm extends Component {
           rows="5"
         />
         {/* TODO Add input for custom categories  */}
-        <select multiple className={bs['form-control']} name="categories" defaultValue="categories">
+        <select multiple className={bs['form-control']} name="categories" defaultValue={["categories"]}>
           <option value="categories" disabled hidden>category</option>
           <option value="important">important</option>
           <option value="fun">fun</option>
