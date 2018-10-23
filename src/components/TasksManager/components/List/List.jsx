@@ -5,6 +5,7 @@ import bs from '../../../../styles/bootstrap.module.css';
 import styles from './List.module.sass';
 import Task from '../Task/Task';
 import * as actions from './actions';
+import moment from 'moment';
 
 export class List extends Component {
   componentDidMount() {
@@ -49,7 +50,9 @@ const handleFilter = (list, filters) => (
 );
 
 const mapStateToProps = state => ({
-  tasks: handleFilter(state.taskManager.list, state.taskManager.filters),
+  tasks: handleFilter(state.taskManager.list, state.taskManager.filters).sort((a, b) => (
+    moment(a.date) - moment(b.date)
+  )),
   allCategories: state.taskManager.categories,
 });
 

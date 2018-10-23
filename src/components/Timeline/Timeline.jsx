@@ -44,11 +44,9 @@ Timeline.propTypes = {
 };
 
 const createTimeline = (tasks, forecast) => (
-  [...tasks, ...forecast].sort((a, b) => {
-    console.log(moment(a.date));
-    console.log(moment(b.date));
-    return moment(a.date) - moment(b.date);
-  })
+  [...tasks, ...forecast].sort((a, b) => (
+    moment(a.date) - moment(b.date)
+  ))
 );
 
 const mapStateToProps = state => ({

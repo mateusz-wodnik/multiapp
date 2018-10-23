@@ -16,7 +16,6 @@ class Task extends Component {
     this.timeRef = createRef();
     this.descriptionRef = createRef();
     this.categoriesRef = createRef();
-    console.log(props)
   }
 
   state = {
@@ -26,7 +25,6 @@ class Task extends Component {
   };
 
   handleOpen = (e) => {
-    console.log(e.target);
     if (e.target.localName !== 'header') return;
     this.setState(state => ({
       open: !state.open,
