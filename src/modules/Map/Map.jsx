@@ -5,6 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import customStyle from './customStyle';
 import styles from './Map.module.sass';
 
+// Pass map component with context API
 const MapContext = createContext('elo');
 export const MapProvider = MapContext.Provider;
 export const MapConsumer = MapContext.Consumer;
@@ -21,6 +22,7 @@ class Map extends Component {
   };
 
   componentDidMount() {
+    /* Wroclaw map bounds taken from map metadata */
     const bounds = [
       [16.652, 50.877], // Southwest coordinates
       [17.363, 51.311], // Northeast coordinates
@@ -36,7 +38,7 @@ class Map extends Component {
     map.on('load', () => this.setState({ map }));
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const { map } = this.state;
     const { position } = this.props;
     if (map && prevProps.position !== position) {
@@ -46,8 +48,7 @@ class Map extends Component {
 
   componentWillUnmount() {
     const { map } = this.state;
-    console.log('eloelo')
-    map && map.remove();
+    if (map) map.remove();
   }
 
   setPosition = (position) => {
@@ -56,9 +57,8 @@ class Map extends Component {
   };
 
   render() {
-    const { state, props } = this;
-    const { map } = state;
-    const { children } = props;
+    const { children } = this.props;
+    const { map } = this.state;
     return (
       <MapProvider value={{ map }}>
         <div ref={this.mapContainer} className={styles.map}>
@@ -71,10 +71,12 @@ class Map extends Component {
 
 Map.defaultProps = {
   children: null,
+  position: null,
 };
 
 Map.propTypes = {
   children: PropTypes.node,
+  position: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default Map;

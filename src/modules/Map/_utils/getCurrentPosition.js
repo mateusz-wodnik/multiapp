@@ -1,6 +1,6 @@
 /**
- * This function gets actual position of client with HTML5 geolocation API. It returns promise and handles errors.
- * @return {Promise<any>}
+ * This function gets actual position of client with HTML5 geolocation API.
+ * @return Promise
  */
 export default function getCurrentPosition() {
   return new Promise((resolve, reject) => {

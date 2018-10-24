@@ -9,40 +9,23 @@ class Layer extends Component {
       return this.addIcon(map, icon)
         .then(() => {
           this.addLayer(map);
-          custom(map);
-          console.log('eloelo', custom);
+          if (custom) custom(map);
         })
         .catch(console.error);
     }
     if (map) {
       this.addLayer(map);
       custom(map);
-      console.log('eloelo', custom)
     }
   }
 
-  componentDidUpdate(prevProps) { //eslint-disable-line
+  componentDidUpdate(prevProps) {
     const {
-      map,
-      features,
-      id,
-      icon,
-      custom,
-      hide,
+      map, features, id, hide,
     } = this.props;
-    if (prevProps.map !== map) {
-      if (icon) {
-        return this.addIcon(map, icon)
-          .then(() => this.addLayer(map))
-          .catch(console.error);
-      }
-      this.addLayer(map);
-      console.log('eloell', custom)
-      custom(map);
-    }
     if (prevProps.features !== features) {
       const source = map.getSource(id);
-      source && source.setData(features);
+      if (source) source.setData(features);
     }
     if (prevProps.hide !== hide) {
       map.setLayoutProperty(id, 'visibility', hide ? 'none' : 'visible');
@@ -92,8 +75,6 @@ class Layer extends Component {
     });
   };
 
-  handleCustomBehaviour = (func) => func();
-
   render = () => null;
 }
 
@@ -105,6 +86,8 @@ Layer.defaultProps = {
   iconSize: 1,
   textField: '',
   textSize: 10,
+  hide: false,
+  custom: () => null,
 };
 
 Layer.propTypes = {
@@ -115,6 +98,8 @@ Layer.propTypes = {
   iconSize: PropTypes.number,
   textField: PropTypes.string,
   textSize: PropTypes.number,
+  hide: PropTypes.bool,
+  custom: PropTypes.func,
 };
 
 export default React.forwardRef((props, ref) => (

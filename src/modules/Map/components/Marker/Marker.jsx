@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
-import connect from 'react-redux/es/connect/connect';
 import mapboxgl from 'mapbox-gl';
-import * as actions from './actions';
 import { MapConsumer } from '../../Map';
 
 class Marker extends Component {
   componentDidMount() {
     const { map, coordinates } = this.props;
-    map && this.createMarker();
-    map && this.handleFly(coordinates);
+    if (map) {
+      this.createMarker();
+      this.handleFly(coordinates);
+    }
   }
 
-  componentDidUpdate(prevProps) {
-    // if (prevProps.coordinates !== coordinates) {
-    //   // TODO: fix set transition only to elements where actual values has changed not only object references
-    //   console.log(prevProps.coordinates, coordinates);
-    //   // this.marker.getElement().style = 'transition: 2s';
-    //   this.marker.setLngLat(coordinates);
-    // }
-  }
+  // componentDidUpdate(prevProps) {
+  //  if (prevProps.coordinates !== coordinates) {
+  //     // TODO: fix set transition only to elements where actual values has changed not only object references
+  //    console.log(prevProps.coordinates, coordinates);
+  //    // this.marker.getElement().style = 'transition: 2s';
+  //    this.marker.setLngLat(coordinates);
+  //  }
+  // }
 
   componentWillUnmount() {
     this.marker.remove();
@@ -31,10 +31,11 @@ class Marker extends Component {
     map.flyTo({
       center,
     });
-  }
+  };
 
   createMarker = () => {
     const { map, coordinates, children } = this.props;
+    // Creating HTML from JSX, because Mapbox gl accepts only pure HTML elements as a custom marker
     const str = ReactDOMServer.renderToString(children);
     const marker = document.createRange().createContextualFragment(str).children[0];
     this.marker = new mapboxgl.Marker(marker)
@@ -57,10 +58,8 @@ Marker.propTypes = {
   map: PropTypes.objectOf(PropTypes.object),
 };
 
-const ConnectedMarker = connect(null, { ...actions })(Marker);
-
 export default React.forwardRef((props, ref) => (
   <MapConsumer>
-    {context => <ConnectedMarker {...props} {...context} ref={ref} />}
+    {context => <Marker {...props} {...context} ref={ref} />}
   </MapConsumer>
 ));
