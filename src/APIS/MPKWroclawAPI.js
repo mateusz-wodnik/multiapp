@@ -8,7 +8,7 @@ export default class MPKWroclawAPI {
     this.trams = trams;
   }
 
-  getPosition(...ids) {
+  getPosition(ids) {
     const body = new URLSearchParams();
     ids.forEach((id) => {
       body.append('busList[][]', id);

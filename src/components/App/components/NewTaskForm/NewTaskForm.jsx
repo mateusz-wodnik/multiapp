@@ -30,7 +30,7 @@ class NewTaskForm extends Component {
       description: description.value,
       date: newDate.toDate(),
       categories: [...categories.selectedOptions].map(option => option.value),
-      place,
+      place: JSON.parse(place),
     };
     addTaskRequest(task);
   };

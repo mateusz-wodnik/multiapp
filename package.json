@@ -12,6 +12,7 @@
     "moment": "^2.22.2",
     "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
+    "query-string": "^6.2.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-hot-loader": "^4.3.11",

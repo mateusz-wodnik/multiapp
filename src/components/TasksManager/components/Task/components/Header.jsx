@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import styles from '../Task.module.sass';
 import bs from '../../../../../styles/bootstrap.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = class Header extends Component {
   constructor(props) {
@@ -22,7 +23,12 @@ const Header = class Header extends Component {
       editable,
       _id,
       handleOpen,
+      place,
     } = this.props;
+    const {
+      geometry: { coordinates },
+      properties: { name },
+    } = place;
     return (
       <header ref={this.header} className={`${styles.header} ${bs['card-header']}`} onClick={handleOpen}>
         <h4 ref={titleRef} className={`${styles.title} ${editable ? styles.editable : ''}`} contentEditable={editable}>{title}</h4>
@@ -53,6 +59,12 @@ const Header = class Header extends Component {
             );
           })}
         </ul>
+        {place && (
+          <Link to={`/maps?coords=${coordinates.reverse().toString()}&name=${name}`} className={styles.place}>
+            ◎
+            {place.properties.name}
+          </Link>
+        )}
       </header>
     );
   }

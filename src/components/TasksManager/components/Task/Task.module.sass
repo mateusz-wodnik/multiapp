@@ -3,7 +3,7 @@
   display: grid
   grid-template-rows: auto auto
   grid-template-columns: auto auto
-  grid-template-areas: "title time" "categories categories"
+  grid-template-areas: "title time" "categories place"
   align-items: start
   justify-content: space-between
   color: var(--fourth)
@@ -66,6 +66,7 @@
   grid-area: categories
   align-self: end
   justify-self: start
+  width: 100%
 .categories, .tags
   display: flex
   overflow: auto
@@ -73,6 +74,12 @@
 .category, .tag
   margin-right: 5px
   position: relative
+.place
+  grid-area: place
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  max-width: 10em
 
 .checkbox
   position: absolute

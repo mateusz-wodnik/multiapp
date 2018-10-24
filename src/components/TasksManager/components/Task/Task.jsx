@@ -81,6 +81,7 @@ class Task extends Component {
       removeTask,
       _id,
       allowEditing,
+      place,
     } = this.props;
     const { open, editable, topbarToggle } = this.state;
     const {
@@ -117,6 +118,7 @@ class Task extends Component {
             titleRef,
             timeRef,
             categoriesRef,
+            place,
           }}
         />
         {open && <Body {...{ description, editable, descriptionRef }} /> }

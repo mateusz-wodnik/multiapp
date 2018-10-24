@@ -28,8 +28,9 @@ class Layer extends Component {
       }
       this.addLayer(map);
     }
-    if (map && prevProps.features !== features) {
-      map.getSource(id).setData(features);
+    if (prevProps.features !== features) {
+      const source = map.getSource(id);
+      source && source.setData(features);
     }
   }
 

@@ -8,7 +8,11 @@ class LiveMPK extends Component {
   componentDidMount() {
     const { setMarkersRequest } = this.props;
     // Set interval to update layers position every 10 seconds
-    setInterval(() => setMarkersRequest(32, 145), 10000);
+    this.requestInterval = setInterval(() => setMarkersRequest([32, 145]), 10000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.requestInterval);
   }
 
   render() {

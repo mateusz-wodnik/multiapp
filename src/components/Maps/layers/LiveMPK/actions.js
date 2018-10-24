@@ -26,10 +26,10 @@ export const error = message => ({
   error: message,
 });
 
-export const setMarkersRequest = (...ids) => (
+export const setMarkersRequest = ids => (
   (dispatch) => {
     dispatch(loading());
-    API.getPosition(...ids)
+    API.getPosition(ids)
       .then((markers) => {
         const features = geoJSONParser(live, 'x', 'y');
         dispatch(set(features));

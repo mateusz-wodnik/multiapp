@@ -39,19 +39,23 @@ class Map extends Component {
       maxBounds: bounds,
     });
     map.on('load', () => {
-      this.setState({ map }, () => this.setCurrentPosition(this.state.map)); // eslint-disable-line
+      this.setState({ map }); // eslint-disable-line
       // map.querySourceFeatures(sourceID, parameters)
     });
   }
 
-  setCurrentPosition = (map) => {
-    getCurrentPosition()
-      .then((position) => {
-        map.flyTo({
-          center: Object.values(position).map(pos => pos.toPrecision(5)).reverse(),
-        });
-      })
-      .catch(err => alert(err));
+  componentDidUpdate(prevProps, prevState) {
+    const { map } = this.state;
+    const { position } = this.props;
+    if (map && prevProps.position !== position) {
+      console.log(position)
+      this.setPosition(position);
+    }
+  }
+
+  setPosition = (position) => {
+    const { map } = this.state;
+    map.flyTo({ center: position });
   };
 
   render() {
@@ -61,7 +65,7 @@ class Map extends Component {
     return (
       <MapProvider value={{ map }}>
         <div ref={this.mapContainer} className={styles.map}>
-          {children}
+          {map && children}
         </div>
       </MapProvider>
     );

@@ -8,15 +8,12 @@ import { MapConsumer } from '../../Map';
 
 class Marker extends Component {
   componentDidMount() {
-    const { map } = this.props;
+    const { map, coordinates } = this.props;
     map && this.createMarker();
+    map && this.handleFly(coordinates);
   }
 
   componentDidUpdate(prevProps) {
-    const { map } = this.props;
-    if (prevProps.map !== map) {
-      this.createMarker();
-    }
     // if (prevProps.coordinates !== coordinates) {
     //   // TODO: fix set transition only to elements where actual values has changed not only object references
     //   console.log(prevProps.coordinates, coordinates);
@@ -27,6 +24,13 @@ class Marker extends Component {
 
   componentWillUnmount() {
     this.marker.remove();
+  }
+
+  handleFly = (center) => {
+    const { map } = this.props;
+    map.flyTo({
+      center,
+    });
   }
 
   createMarker = () => {

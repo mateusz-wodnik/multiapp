@@ -12,6 +12,7 @@ const SearchBox = ({
   onChange,
   ref,
   setPlace,
+  value,
 }) => (
   <div className={`${styles.container} ${bs['input-group']}`}>
     <div className={bs['input-group-prepend']}>
@@ -26,6 +27,7 @@ const SearchBox = ({
           placeholder="Search place"
           aria-label="Search place"
           aria-describedby="googleAttribution"
+          defaultValue={value}
           disabled={!service}
           onChange={onChange}
           ref={ref}
