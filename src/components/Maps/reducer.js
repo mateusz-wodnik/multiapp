@@ -5,5 +5,6 @@ import search from './components/SearchBox/reducer';
 export default combineReducers({
   mpk: MarkerReducer('MPK'),
   stations: MarkerReducer('STATIONS'),
+  tasks: MarkerReducer('TASKS'),
   searchedPlace: search,
 });

@@ -6,11 +6,14 @@ import LiveMPK from './layers/LiveMPK/LiveMPK';
 import StationsMPK from './layers/StationsMPK/StationsMPK';
 import SearchBox from './components/SearchBox/SearchBox';
 import getCurrentPosition from '../../modules/Map/_utils/getCurrentPosition';
+import Tasks from './layers/Tasks/Tasks';
+import Filters from './components/Filters/Filters';
 
 class Maps extends Component {
   state = {
     stations: true,
     live: true,
+    tasks: true,
     search: true,
     marker: null,
     // TODO: Add tasks layer that contains all daily tasks places
@@ -46,18 +49,23 @@ class Maps extends Component {
     }
   };
 
+  handleSwitch = (item) => this.setState(state => ({ [item]: !state[item] }));
+
   render() {
     const {
       stations,
       live,
       search,
+      tasks,
       marker,
       currentPosition,
     } = this.state;
     return (
       <Map position={marker ? null : currentPosition}>
+        <Filters handleSwitch={this.handleSwitch} />
         <StationsMPK hide={stations} />
         <LiveMPK hide={live} />
+        <Tasks hide={tasks} />
         <SearchBox hide={search} value={marker && marker.name} />
         {marker && <Marker coordinates={marker.coordinates} />}
       </Map>

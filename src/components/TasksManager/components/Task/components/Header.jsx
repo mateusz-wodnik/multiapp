@@ -60,7 +60,7 @@ const Header = class Header extends Component {
           })}
         </ul>
         {place && (
-          <Link to={`/maps?coords=${coordinates.reverse().toString()}&name=${name}`} className={styles.place}>
+          <Link to={`/maps?coords=${coordinates.toString()}&name=${name}`} className={styles.place}>
             ◎
             {place.properties.name}
           </Link>

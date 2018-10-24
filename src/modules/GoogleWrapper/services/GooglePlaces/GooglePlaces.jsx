@@ -23,6 +23,7 @@ class GooglePlaces extends Component {
 
   handleSelect = (place) => {
     const { listnerCallback } = this.props;
+    place.geometry.coordinates.reverse();
     this.input.current.dataset.geoJSON = JSON.stringify(place);
     listnerCallback(place);
   };

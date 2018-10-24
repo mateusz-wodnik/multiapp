@@ -11,8 +11,8 @@ class StationsMPK extends Component {
   }
 
   render() {
-    const { markers } = this.props;
-    return <Layer id="stations" features={markers} icon="/station.png" iconSize={0.6} />;
+    const { markers, hide } = this.props;
+    return <Layer id="stations" hide={hide} features={markers} icon="/station.png" iconSize={0.6} />;
   }
 }
 

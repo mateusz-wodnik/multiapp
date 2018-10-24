@@ -20,17 +20,20 @@ class NewTaskForm extends Component {
       time: { value: time },
       description,
       categories,
-      place: { dataset: { geoJSON: place } },
+      place: { dataset: { geoJSON } },
     } = e.target;
     const timeSplit = time.split(':');
     const newDate = moment(date);
     newDate.set({ h: timeSplit[0], m: timeSplit[1] });
+    const place = JSON.parse(geoJSON);
+    place.properties.description = description.value;
+    console.log(place)
     const task = {
       title: title.value,
       description: description.value,
       date: newDate.toDate(),
       categories: [...categories.selectedOptions].map(option => option.value),
-      place: JSON.parse(place),
+      place,
     };
     addTaskRequest(task);
   };

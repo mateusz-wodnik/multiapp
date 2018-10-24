@@ -4,13 +4,21 @@ import { MapConsumer } from '../../Map';
 
 class Layer extends Component {
   componentDidMount() { //eslint-disable-line
-    const { map, icon } = this.props;
+    const { map, icon, custom } = this.props;
     if (map && icon) {
       return this.addIcon(map, icon)
-        .then(() => this.addLayer(map))
+        .then(() => {
+          this.addLayer(map);
+          custom(map);
+          console.log('eloelo', custom);
+        })
         .catch(console.error);
     }
-    if (map) this.addLayer(map);
+    if (map) {
+      this.addLayer(map);
+      custom(map);
+      console.log('eloelo', custom)
+    }
   }
 
   componentDidUpdate(prevProps) { //eslint-disable-line
@@ -19,6 +27,8 @@ class Layer extends Component {
       features,
       id,
       icon,
+      custom,
+      hide,
     } = this.props;
     if (prevProps.map !== map) {
       if (icon) {
@@ -27,10 +37,15 @@ class Layer extends Component {
           .catch(console.error);
       }
       this.addLayer(map);
+      console.log('eloell', custom)
+      custom(map);
     }
     if (prevProps.features !== features) {
       const source = map.getSource(id);
       source && source.setData(features);
+    }
+    if (prevProps.hide !== hide) {
+      map.setLayoutProperty(id, 'visibility', hide ? 'none' : 'visible');
     }
   }
 
@@ -52,6 +67,7 @@ class Layer extends Component {
       iconSize = 1,
       textField = '',
       textSize = 10,
+      hide,
     } = this.props;
     const placeholder = {
       type: 'FeatureCollection',
@@ -71,9 +87,12 @@ class Layer extends Component {
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
         'text-offset': [0, 1],
         'text-anchor': 'top',
+        visibility: hide ? 'none' : 'visible',
       },
     });
   };
+
+  handleCustomBehaviour = (func) => func();
 
   render = () => null;
 }

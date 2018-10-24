@@ -16,8 +16,8 @@ class LiveMPK extends Component {
   }
 
   render() {
-    const { markers } = this.props;
-    return <Layer id="live" features={markers} icon="/bus-blue.png" iconSize={1} textField="name" />;
+    const { markers, hide } = this.props;
+    return <Layer id="live" hide={hide} features={markers} icon="/bus-blue.png" iconSize={1} textField="name" />;
   }
 }
 

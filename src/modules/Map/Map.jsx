@@ -53,6 +53,12 @@ class Map extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { map } = this.state;
+    console.log('eloelo')
+    map && map.remove();
+  }
+
   setPosition = (position) => {
     const { map } = this.state;
     map.flyTo({ center: position });

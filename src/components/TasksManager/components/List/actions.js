@@ -20,7 +20,7 @@ Store.prototype.getAll = function (collectionName) {
 };
 
 const actualDate = moment().format('DD-MM-YYYY');
-const tasksStore = new Store(actualDate, 'tasks');
+export const tasksStore = new Store(actualDate, 'tasks');
 
 export const SET_LIST = 'SET_LIST';
 export const ADD_TASK = 'ADD_TASK';
