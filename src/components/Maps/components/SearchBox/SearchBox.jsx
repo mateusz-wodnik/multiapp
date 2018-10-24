@@ -5,7 +5,6 @@ import styles from './SearchBox.module.sass';
 import bs from '../../../../styles/bootstrap.module.css';
 import GooglePlaces from '../../../../modules/GoogleWrapper/services/GooglePlaces/GooglePlaces';
 import GoogleWrapper from '../../../../modules/GoogleWrapper/GoogleWrapper';
-import { setPlace } from './actions';
 
 const SearchBox = ({
   service,
@@ -28,32 +27,42 @@ const SearchBox = ({
           aria-label="Search place"
           aria-describedby="googleAttribution"
           defaultValue={value}
-          disabled={!service}
           onChange={onChange}
           ref={ref}
         />
       </GooglePlaces>
     </GoogleWrapper>
+    {!service && (
+      <input
+        type="text"
+        className={bs['form-control']}
+        placeholder="Search place"
+        aria-label="Search place"
+        defaultValue={value}
+        disabled
+      />
+    )}
   </div>
 );
 
 SearchBox.defaultProps = {
   setPlace: () => null,
-  service: false,
   onChange: () => null,
   ref: null,
+  value: '',
+  service: false,
 };
 
 SearchBox.propTypes = {
   setPlace: PropTypes.func,
-  service: PropTypes.bool,
   onChange: PropTypes.func,
   ref: PropTypes.node,
+  value: PropTypes.string,
+  service: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  ...state.place,
   service: state.googleMapsService.service,
 });
 
-export default connect(mapStateToProps, { setPlace })(SearchBox);
+export default connect(mapStateToProps)(SearchBox);

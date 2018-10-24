@@ -10,9 +10,9 @@ class GoogleWrapper extends Component {
   }
 
   render() {
-    const { children } = this.props;
-    return children;
-  };
+    const { children, service } = this.props;
+    return service && children;
+  }
 }
 
 GoogleWrapper.defaultProps = {

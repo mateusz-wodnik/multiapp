@@ -5,8 +5,6 @@ import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import bs from '../../../../styles/bootstrap.module.css';
 import * as actions from '../../../TasksManager/components/List/actions';
-import StationsMPK from '../../../Maps/layers/StationsMPK/StationsMPK';
-import LiveMPK from '../../../Maps/layers/LiveMPK/LiveMPK';
 import SearchBox from '../../../Maps/components/SearchBox/SearchBox';
 import Map from '../../../../modules/Map/Map';
 
@@ -19,20 +17,22 @@ class NewTaskForm extends Component {
       date: { valueAsDate: date },
       time: { value: time },
       description,
-      categories,
+      categories: { selectedOptions },
       place: { dataset: { geoJSON } },
     } = e.target;
+    /* Handle date and time */
     const timeSplit = time.split(':');
     const newDate = moment(date);
     newDate.set({ h: timeSplit[0], m: timeSplit[1] });
+    /* -------------------- */
     const place = JSON.parse(geoJSON);
+    // Add description to geoJSON data for on map popup display
     place.properties.description = description.value;
-    console.log(place)
     const task = {
       title: title.value,
       description: description.value,
       date: newDate.toDate(),
-      categories: [...categories.selectedOptions].map(option => option.value),
+      categories: [...selectedOptions].map(option => option.value),
       place,
     };
     addTaskRequest(task);
@@ -58,7 +58,7 @@ class NewTaskForm extends Component {
           rows="5"
         />
         {/* TODO Add input for custom categories  */}
-        <select multiple className={bs['form-control']} name="categories" defaultValue={["categories"]}>
+        <select multiple className={bs['form-control']} name="categories" defaultValue={['categories']}>
           <option value="categories" disabled hidden>category</option>
           <option value="important">important</option>
           <option value="fun">fun</option>
@@ -81,7 +81,7 @@ class NewTaskForm extends Component {
           <input type="time" className={bs['form-control']} name="time" defaultValue={moment().format('HH:mm')} />
         </div>
         <Map>
-          <SearchBox hide={true} />
+          <SearchBox />
         </Map>
         <div className={bs['input-group']}>
           <input className={`${bs.btn} ${bs['btn-danger']} ${bs['form-control']}`} placeholder="Reset" type="reset" />
@@ -104,7 +104,5 @@ NewTaskForm.propTypes = {
   addTaskRequest: PropTypes.func,
   toggleForm: PropTypes.func,
 };
-
-// const mapStateToProps = state => ({});
 
 export default connect(null, { ...actions })(NewTaskForm);

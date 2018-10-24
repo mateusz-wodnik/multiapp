@@ -54,7 +54,7 @@ export default class GooglePlacesAPI {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [lat(), lng()],
+          coordinates: [lng(), lat()],
         },
         properties: {
           name,
