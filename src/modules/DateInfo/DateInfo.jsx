@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import Clock from '../Clock/Clock';
 
 class DateInfo extends Component {
   state = {
     time: moment(),
-    dayTable: [
-      '',
-      'monday',
-      'tuesday',
-      'wednesday',
-      'thursday',
-      'friday',
-      'saturday',
-      'sunday',
-    ],
   };
 
   componentDidMount() {
@@ -23,12 +12,11 @@ class DateInfo extends Component {
   }
 
   render() {
-    const { dayTable, time } = this.state;
+    const { time } = this.state;
     const { styles, children } = this.props;
     return (
       <div className={styles.dateInfo}>
-        <time className={styles.day}>{dayTable[time.day()]}</time>
-        <Clock className={styles.clock} />
+        <time className={styles.day}>{time.format('dddd')}</time>
         <time className={styles.date} dateTime={time.format('YYYY-MM-DD')}>{time.format('LL')}</time>
         {children}
       </div>

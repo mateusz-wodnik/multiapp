@@ -91,7 +91,7 @@ Layer.defaultProps = {
 };
 
 Layer.propTypes = {
-  map: PropTypes.objectOf(PropTypes.object),
+  map: PropTypes.objectOf(PropTypes.any),
   id: PropTypes.string,
   features: PropTypes.objectOf(PropTypes.any),
   icon: PropTypes.string,

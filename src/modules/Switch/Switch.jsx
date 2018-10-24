@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './Switch.module.sass';
 
 class Switch extends Component {
@@ -26,5 +27,15 @@ class Switch extends Component {
     );
   }
 }
+
+Switch.defaultProps = {
+  container: '',
+  onClick: () => null,
+};
+
+Switch.propTypes = {
+  container: PropTypes.string,
+  onClick: PropTypes.func,
+};
 
 export default Switch;

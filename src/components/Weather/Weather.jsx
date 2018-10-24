@@ -5,6 +5,7 @@ import styles from './Weather.module.sass';
 import DateInfo from '../../modules/DateInfo/DateInfo';
 import * as actions from './actions';
 import bs from '../../styles/bootstrap.module.css';
+import Clock from '../../modules/Clock/Clock';
 
 class Weather extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class Weather extends Component {
     return (
       <header className={`${styles.container} ${bs.container}`}>
         <DateInfo styles={styles}>
+          <Clock className={styles.clock} />
           <span className={styles.wind}>{`${wind.speed} m/s`}</span>
         </DateInfo>
         <h4 className={styles.temperature}>{`${temp}℃`}</h4>
