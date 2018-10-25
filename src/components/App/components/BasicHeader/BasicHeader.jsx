@@ -1,37 +1,22 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
 import bs from '../../../../styles/bootstrap.module.css';
 import styles from './BasicHeader.module.sass';
-import NewTaskForm from '../NewTaskForm/NewTaskForm';
 import DateInfo from '../../../../modules/DateInfo/DateInfo';
 
-class BasicHeader extends Component {
-  state = {
-    isFormOpened: false,
-  };
+const BasicHeader = ({ children }) => (
+  <header className={`${styles.container} ${bs.container}`}>
+    <DateInfo styles={styles} />
+    {children}
+  </header>
+);
 
-  toggleForm = () => {
-    this.setState(state => ({ isFormOpened: !state.isFormOpened }));
-  };
+BasicHeader.defaultProps = {
+  children: null,
+};
 
-  render() {
-    const { isFormOpened } = this.state;
-    return (
-      <header className={`${styles.container} ${bs.container}`}>
-        <DateInfo styles={styles} />
-        <button
-          type="button"
-          className={`${styles.open} ${bs.btn} ${bs['btn-primary']}`}
-          onClick={this.toggleForm}
-        >
-          {isFormOpened ? '🖉' : '+'}
-        </button>
-        {isFormOpened && (
-          <NewTaskForm toggleForm={this.toggleForm} styles={styles} />
-        )}
-      </header>
-    );
-  }
-}
+BasicHeader.propTypes = {
+  children: PropTypes.node,
+};
 
-export default BasicHeader; // eslint-disable-line
+export default BasicHeader;

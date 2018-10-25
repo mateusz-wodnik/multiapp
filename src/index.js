@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './styles/bootstrap.module.css';
 import './styles/bootstrap-reboot.css';
 import './styles/global.sass';
 import { BrowserRouter, Route } from 'react-router-dom';
