@@ -40,16 +40,20 @@ class Task extends Component {
         titleRef: { current: { textContent: title } },
         timeRef: { current: { value: time } },
         descriptionRef: { current: { textContent: description } },
-        categoriesRef: { current: { childNodes: rawCategories } },
+        categoriesRef: { current: { childNodes: allCategories } },
       } = this;
-      const timeSplit = time.split(':');
+      /* Map categories 'ul' list for checked inputs */
       const categories = [];
-      [...rawCategories].forEach((li) => {
+      [...allCategories].forEach((li) => {
         const isChecked = li.children.category.checked;
         if (isChecked) categories.push(li.textContent);
       });
+      /* ------------------------------------------- */
+      /* Combine date and time inputs */
+      const timeSplit = time.split(':');
       const newDate = moment(date);
       newDate.set({ h: timeSplit[0], m: timeSplit[1] });
+      /* --------------------------- */
       const task = {
         title,
         description,

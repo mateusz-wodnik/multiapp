@@ -48,6 +48,7 @@ class NewTaskForm extends Component {
 
   render() {
     const { opened } = this.state;
+    const { categories } = this.props;
     return (
       <Fragment>
         <button
@@ -77,13 +78,7 @@ class NewTaskForm extends Component {
               {/* TODO Add input for custom categories  */}
               <select multiple className={bs['form-control']} name="categories" defaultValue={['categories']}>
                 <option value="categories" disabled hidden>category</option>
-                <option value="important">important</option>
-                <option value="fun">fun</option>
-                <option value="work">work</option>
-                <option value="family">family</option>
-                <option value="meeting">meeting</option>
-                <option value="eating">eating</option>
-                <option value="shopping">shopping</option>
+                {categories.map(category => <option value={category}>{category}</option>)}
               </select>
               <div className={`${bs['input-group']}`}>
                 <div className={`${bs['input-group-prepend']}`}>
@@ -115,12 +110,16 @@ class NewTaskForm extends Component {
 
 NewTaskForm.defaultProps = {
   addTaskRequest: () => null,
-  toggleForm: () => null,
+  categories: [],
 };
 
 NewTaskForm.propTypes = {
   addTaskRequest: PropTypes.func,
-  toggleForm: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default connect(null, { addTaskRequest })(NewTaskForm);
+const mapStateToProps = state => ({
+  categories: state.taskManager.categories,
+});
+
+export default connect(mapStateToProps, { addTaskRequest })(NewTaskForm);

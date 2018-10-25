@@ -6,25 +6,19 @@ import styles from './Filters.module.sass';
 import * as actions from './actions';
 
 class Filters extends Component {
-  // componentDidUpdate(prevProps) {
-  //   const { setFilters, filterTypes } = this.props;
-  //   console.log(prevProps.filterTypes, filterTypes);
-  //   if (prevProps.filterTypes.length === 0) {
-  //     setFilters(filterTypes);
-  //   }
-  // }
-
   handleButtons = (e, filter) => {
     const {
       addFilter, removeFilter, setFilters, filterTypes,
     } = this.props;
-    const self = e.target;
-    const value = self.getAttribute('aria-checked');
+    const { target } = e;
+    const value = target.getAttribute('aria-checked');
     if (value === 'true') {
-      self.setAttribute('aria-checked', false);
+      target.setAttribute('aria-checked', false);
+      // False filter const refers to 'all' button
       filter ? removeFilter(filter) : setFilters([]); // eslint-disable-line
     } else {
-      self.setAttribute('aria-checked', true);
+      target.setAttribute('aria-checked', true);
+      // False filter const refers to 'all' button
       filter ? addFilter(filter) : setFilters(filterTypes); // eslint-disable-line
     }
   };
@@ -75,9 +69,22 @@ Filters.propTypes = {
   setFilters: PropTypes.func,
 };
 
+// TODO: Check efficiency of each filterTypes method
+const filterTypes = (list) => {
+  const types = {};
+  list.forEach((item) => {
+    item.categories.forEach((category) => {
+      types[category] = true;
+    });
+  });
+  return Object.keys(types);
+};
+
 const mapStateToProps = state => ({
   filters: state.taskManager.filters,
-  filterTypes: [...new Set([].concat(...state.taskManager.list.map(item => item.categories)))],
+  filterTypes: filterTypes(state.taskManager.list),
+  // Spread the Set object that is created from concatenated array of tasks categories arrays.
+  // filterTypes: [...new Set([].concat(...state.taskManager.list.map(item => item.categories)))],
 });
 
 export default connect(mapStateToProps, { ...actions })(Filters);

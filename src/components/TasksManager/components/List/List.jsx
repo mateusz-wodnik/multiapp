@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import bs from '../../../../styles/bootstrap.module.css';
 import styles from './List.module.sass';
 import Task from '../Task/Task';
 import * as actions from './actions';
-import moment from 'moment';
 
 export class List extends Component {
   componentDidMount() {

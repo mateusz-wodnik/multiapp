@@ -3,13 +3,13 @@ export const initialState = {
   error: null,
 };
 
-function FetchReducerCreator(counterName = '') {
+function FetchReducerCreator(name = '') {
   return function markers(state = initialState, action) {
     const { type, ...update } = action;
     switch (type) {
-      case `SET_${counterName}`:
-      case `LOADING_${counterName}`:
-      case `ERROR_${counterName}`:
+      case `SET_${name}`:
+      case `LOADING_${name}`:
+      case `ERROR_${name}`:
         return { ...state, ...update };
       default:
         return state;
