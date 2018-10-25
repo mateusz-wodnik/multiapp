@@ -1,14 +1,13 @@
-import stations from './stations.data';
-import {setList, tasksStore} from '../../../TasksManager/components/List/actions'
+import { tasksStore } from '../../../TasksManager/components/List/actions';
 
 export const SET_TASKS = 'SET_TASKS';
 export const LOADING_TASKS = 'LOADING_TASKS';
 export const ERROR_TASKS = 'ERROR_TASKS';
 
-export const setMarkers = markers => ({
+export const setMarkers = result => ({
   type: SET_TASKS,
   loading: false,
-  markers,
+  result,
 });
 
 export const loadingMarkers = () => ({
@@ -27,7 +26,7 @@ export const setMarkersRequest = () => (
   (dispatch) => {
     dispatch(loadingMarkers());
     tasksStore.getAll('tasks')
-      .then(list => {
+      .then((list) => {
         const features = list.map(task => task.place);
         const geoJSON = {
           type: 'FeatureCollection',

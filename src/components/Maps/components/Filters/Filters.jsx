@@ -4,20 +4,20 @@ import styles from './Filters.module.sass';
 import Switch from '../../../../modules/Switch/Switch';
 
 const Filters = ({ handleSwitch }) => (
-  <div className={styles.container}>
-    <div className={styles.filter}>
-      stations:
+  <ul className={styles.container}>
+    <li className={styles.filter}>
+      <span className={styles.name}>stations</span>
       <Switch onClick={() => handleSwitch('stations')} />
-    </div>
-    <div className={styles.filter}>
-      live:
+    </li>
+    <li className={styles.filter}>
+      <span className={styles.name}>live</span>
       <Switch onClick={() => handleSwitch('live')} />
-    </div>
-    <div className={styles.filter}>
-      tasks:
+    </li>
+    <li className={styles.filter}>
+      <span className={styles.name}>tasks</span>
       <Switch onClick={() => handleSwitch('tasks')} />
-    </div>
-  </div>
+    </li>
+  </ul>
 );
 
 Filters.defaultProps = {

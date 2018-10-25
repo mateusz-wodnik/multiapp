@@ -7,10 +7,10 @@ export const ERROR_STATIONS = 'ERROR_STATIONS';
 
 const API = new MPKWroclawAPI();
 
-export const setMarkers = markers => ({
+export const setMarkers = result => ({
   type: SET_STATIONS,
   loading: false,
-  markers,
+  result,
 });
 
 export const loadingMarkers = () => ({

@@ -7,7 +7,7 @@ import bs from '../../../../styles/bootstrap.module.css';
 import buttonStyles from '../../../App/components/BasicHeader/BasicHeader.module.sass';
 import styles from './NewTaskForm.module.sass';
 import { addTaskRequest } from '../List/actions';
-import SearchBox from '../../../Maps/components/SearchBox/SearchBox';
+import SearchBox from '../../../../modules/GoogleWrapper/components/SearchBox/SearchBox';
 import Map from '../../../../modules/Map/Map';
 
 class NewTaskForm extends Component {

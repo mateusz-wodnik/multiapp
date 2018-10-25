@@ -16,23 +16,25 @@ class LiveMPK extends Component {
   }
 
   render() {
-    const { markers, hide } = this.props;
-    return <Layer id="live" hide={hide} features={markers} icon="/bus-blue.png" iconSize={1} textField="name" />;
+    const { features, hide } = this.props;
+    return <Layer id="live" hide={hide} features={features} icon="/bus-blue.png" iconSize={1} textField="name" />;
   }
 }
 
 LiveMPK.defaultProps = {
   setMarkersRequest: () => null,
-  markers: {},
+  features: {},
+  hide: false,
 };
 
 LiveMPK.propTypes = {
   setMarkersRequest: PropTypes.func,
-  markers: PropTypes.objectOf(PropTypes.object),
+  features: PropTypes.objectOf(PropTypes.any),
+  hide: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  ...state.maps.mpk,
+  features: state.maps.mpk.result,
 });
 
 export default connect(mapStateToProps, { setMarkersRequest })(LiveMPK);

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import Map from '../../modules/Map/Map';
 import Marker from '../../modules/Map/components/Marker/Marker';
 import LiveMPK from './layers/LiveMPK/LiveMPK';
 import StationsMPK from './layers/StationsMPK/StationsMPK';
-import SearchBox from './components/SearchBox/SearchBox';
+import SearchBox from '../../modules/GoogleWrapper/components/SearchBox/SearchBox';
 import getCurrentPosition from '../../modules/Map/_utils/getCurrentPosition';
 import Tasks from './layers/Tasks/Tasks';
 import Filters from './components/Filters/Filters';
@@ -16,7 +17,6 @@ class Maps extends Component {
     tasks: true,
     search: true,
     marker: null,
-    // TODO: Add tasks layer that contains all daily tasks places
   };
 
   componentDidMount() {
@@ -25,8 +25,9 @@ class Maps extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Clear map if search queries was set empty
-    if (this.props.location.search !== prevProps.location.search) {
+    const { location } = this.props;
+    // Update map on search query change
+    if (location.search !== prevProps.location.search) {
       this.handleQueries();
     }
   }
@@ -49,7 +50,7 @@ class Maps extends Component {
     }
   };
 
-  handleSwitch = (item) => this.setState(state => ({ [item]: !state[item] }));
+  handleSwitch = item => this.setState(state => ({ [item]: !state[item] }));
 
   render() {
     const {
@@ -72,5 +73,13 @@ class Maps extends Component {
     );
   }
 }
+
+Maps.defaultProps = {
+  location: undefined,
+};
+
+Maps.propTypes = {
+  location: PropTypes.objectOf(PropTypes.any),
+};
 
 export default Maps;

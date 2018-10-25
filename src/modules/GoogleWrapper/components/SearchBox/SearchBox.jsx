@@ -3,8 +3,8 @@ import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
 import styles from './SearchBox.module.sass';
 import bs from '../../../../styles/bootstrap.module.css';
-import GooglePlaces from '../../../../modules/GoogleWrapper/services/GooglePlaces/GooglePlaces';
-import GoogleWrapper from '../../../../modules/GoogleWrapper/GoogleWrapper';
+import GooglePlaces from '../../services/GooglePlaces/GooglePlaces';
+import GoogleWrapper from '../../GoogleWrapper';
 
 const SearchBox = ({
   service,
@@ -18,20 +18,20 @@ const SearchBox = ({
       <span className={bs['input-group-text']} id="googleAttribution">G</span>
     </div>
     <GoogleWrapper>
-      <GooglePlaces listnerCallback={setPlace}>
+      <GooglePlaces selectCallback={setPlace}>
         <input
           type="text"
           className={bs['form-control']}
           name="place"
           placeholder="Search place"
           aria-label="Search place"
-          aria-describedby="googleAttribution"
           defaultValue={value}
           onChange={onChange}
           ref={ref}
         />
       </GooglePlaces>
     </GoogleWrapper>
+    {/* Google places input placeholder */}
     {!service && (
       <input
         type="text"

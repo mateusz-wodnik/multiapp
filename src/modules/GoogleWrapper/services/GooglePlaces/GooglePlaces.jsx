@@ -17,10 +17,10 @@ class GooglePlaces extends Component {
   };
 
   handleSelect = (place) => {
-    const { listnerCallback } = this.props;
+    const { selectCallback } = this.props;
     // Pass selected place data to input element (if input is nested in form element)
     this.input.current.dataset.geoJSON = JSON.stringify(place);
-    listnerCallback(place);
+    selectCallback(place);
   };
 
   render() {
@@ -31,12 +31,12 @@ class GooglePlaces extends Component {
 
 GooglePlaces.defaultProps = {
   children: null,
-  listnerCallback: () => null,
+  selectCallback: () => null,
 };
 
 GooglePlaces.propTypes = {
   children: PropTypes.node,
-  listnerCallback: PropTypes.func,
+  selectCallback: PropTypes.func,
 };
 
 export default GooglePlaces;

@@ -11,23 +11,25 @@ class StationsMPK extends Component {
   }
 
   render() {
-    const { markers, hide } = this.props;
-    return <Layer id="stations" hide={hide} features={markers} icon="/station.png" iconSize={0.6} />;
+    const { features, hide } = this.props;
+    return <Layer id="stations" hide={hide} features={features} icon="/station.png" iconSize={0.6} />;
   }
 }
 
 StationsMPK.defaultProps = {
   setMarkersRequest: () => null,
-  markers: {},
+  features: {},
+  hide: false,
 };
 
 StationsMPK.propTypes = {
   setMarkersRequest: PropTypes.func,
-  markers: PropTypes.objectOf(PropTypes.any),
+  features: PropTypes.objectOf(PropTypes.any),
+  hide: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  ...state.maps.stations,
+  features: state.maps.stations.result,
 });
 
 export default connect(mapStateToProps, { setMarkersRequest })(StationsMPK);

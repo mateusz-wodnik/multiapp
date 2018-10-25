@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import MarkerReducer from './ReducerCreator';
-import search from './components/SearchBox/reducer';
+import FetchReducerCreator from '../../_utils/FetchReducerCreator';
 
 export default combineReducers({
-  mpk: MarkerReducer('MPK'),
-  stations: MarkerReducer('STATIONS'),
-  tasks: MarkerReducer('TASKS'),
-  searchedPlace: search,
+  mpk: FetchReducerCreator('MPK'),
+  stations: FetchReducerCreator('STATIONS'),
+  tasks: FetchReducerCreator('TASKS'),
 });

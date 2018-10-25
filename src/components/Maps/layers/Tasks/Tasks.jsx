@@ -8,12 +8,11 @@ import { setMarkersRequest } from './actions';
 class Tasks extends Component {
   componentDidMount() {
     const { setMarkersRequest } = this.props;
-    setMarkersRequest(32, 145);
-    console.log(this.props)
+    setMarkersRequest();
   }
 
   handleHover = (map) => {
-    map.on('click', 'tasks', function (e) {
+    map.on('click', 'tasks', (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
       const { description, name } = e.features[0].properties;
 
@@ -37,23 +36,25 @@ class Tasks extends Component {
   };
 
   render() {
-    const { markers, hide } = this.props;
-    return <Layer id="tasks" hide={hide} textField="name" features={markers} icon="/tram-red.png" iconSize={1} custom={this.handleHover} />;
+    const { features, hide } = this.props;
+    return <Layer id="tasks" hide={hide} textField="name" features={features} icon="/tram-red.png" iconSize={1} custom={this.handleHover} />;
   }
 }
 
 Tasks.defaultProps = {
   setMarkersRequest: () => null,
-  markers: {},
+  features: {},
+  hide: false,
 };
 
 Tasks.propTypes = {
   setMarkersRequest: PropTypes.func,
-  markers: PropTypes.objectOf(PropTypes.any),
+  features: PropTypes.objectOf(PropTypes.any),
+  hide: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  ...state.maps.tasks,
+  features: state.maps.tasks.result,
 });
 
 export default connect(mapStateToProps, { setMarkersRequest })(Tasks);

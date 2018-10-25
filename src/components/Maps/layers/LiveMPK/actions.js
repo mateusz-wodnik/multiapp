@@ -8,10 +8,10 @@ export const ERROR_MPK = 'ERROR_MPK';
 
 const API = new MPKWroclawAPI();
 
-export const set = markers => ({
+export const set = result => ({
   type: SET_MPK,
   loading: false,
-  markers,
+  result,
 });
 
 export const loading = () => ({
