@@ -10,6 +10,8 @@ import Timeline from '../Timeline/Timeline';
 import Maps from '../Maps/Maps';
 import Navigation from '../Navigation/Navigation';
 import NewTaskForm from '../TasksManager/components/NewTaskForm/NewTaskForm';
+import Filters from '../TasksManager/components/Filters/Filters';
+import List from '../TasksManager/components/List/List';
 
 
 const App = () => (
@@ -25,8 +27,20 @@ const App = () => (
     {/* TODO: Add Loading screen component and route */}
     <Route path="/overview" component={Weather} />
     <Route path="/overview" component={Timeline} />
-    <Route path="/tasks-list" render={() => <TasksManager allowEditing />} />
-    <Route path="/overview" component={TasksManager} />
+    <Route path="/tasks-list" render={() => (
+      <TasksManager allowEditing>
+        <Filters>
+          <List />
+        </Filters>
+      </TasksManager>
+    )}
+    />
+    <Route path="/overview" render={() => (
+      <TasksManager allowEditing>
+        <List />
+      </TasksManager>
+    )}
+    />
     <Route path="/maps" component={Maps} />
     <Navigation />
     {/* MODALS */}

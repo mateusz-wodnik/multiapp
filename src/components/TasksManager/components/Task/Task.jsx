@@ -76,16 +76,12 @@ class Task extends Component {
 
   render() {
     const {
-      title,
-      date,
       description,
       tags,
-      categories,
-      allCategories,
       removeTask,
       _id,
       allowEditing,
-      place,
+      ...headerProps
     } = this.props;
     const { open, editable, topbarToggle } = this.state;
     const {
@@ -111,18 +107,13 @@ class Task extends Component {
         )}
         <Header
           {...{
-            title,
-            date,
-            categories,
-            editable,
-            allCategories,
-            _id,
-            handleTopbarToggle,
-            handleOpen,
+            ...headerProps,
             titleRef,
             timeRef,
             categoriesRef,
-            place,
+            handleTopbarToggle,
+            handleOpen,
+            editable,
           }}
         />
         {open && <Body {...{ description, editable, descriptionRef }} /> }
@@ -133,12 +124,9 @@ class Task extends Component {
 }
 
 Task.defaultProps = {
-  title: '',
   date: '',
   description: '',
   tags: [],
-  categories: [],
-  allCategories: [],
   open: false,
   _id: '',
   removeTask: () => null,
@@ -146,12 +134,9 @@ Task.defaultProps = {
 };
 
 Task.propTypes = {
-  title: PropTypes.string,
   date: PropTypes.objectOf(PropTypes.any),
   description: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),
-  categories: PropTypes.arrayOf(PropTypes.string),
-  allCategories: PropTypes.arrayOf(PropTypes.string),
   open: PropTypes.bool,
   _id: PropTypes.string,
   removeTask: PropTypes.func,

@@ -1,4 +1,4 @@
-import { tasksStore } from '../../../TasksManager/components/List/actions';
+import { tasksStore } from '../../../TasksManager/actions';
 
 export const SET_TASKS = 'SET_TASKS';
 export const LOADING_TASKS = 'LOADING_TASKS';

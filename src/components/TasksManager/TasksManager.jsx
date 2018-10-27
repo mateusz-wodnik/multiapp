@@ -1,23 +1,37 @@
-import React from 'react';
+import { cloneElement, Component } from 'react';
+import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
-import styles from './TasksManager.module.sass';
-import List from './components/List/List';
-import Filters from './components/Filters/Filters';
-import bs from '../../styles/bootstrap.module.css';
+import { setListRequest, updateTaskRequest } from './actions';
 
-const TasksManager = ({ allowEditing }) => (
-  <article id="taskManager" className={`${styles.container} ${bs.container}`}>
-    <Filters />
-    <List allowEditing={allowEditing} />
-  </article>
-);
+class TasksManager extends Component {
+  componentDidMount() {
+    const { setListRequest } = this.props;
+    setListRequest();
+  }
+
+  render() {
+    const { children, ...props } = this.props;
+    return (
+      cloneElement(children, props)
+    );
+  }
+};
 
 TasksManager.defaultProps = {
+  children: null,
   allowEditing: false,
+  setListRequest: () => null,
 };
 
 TasksManager.propTypes = {
+  children: PropTypes.node,
   allowEditing: PropTypes.bool,
+  setListRequest: PropTypes.func,
 };
 
-export default TasksManager; // eslint-disable-line
+const mapStateToProps = state => ({
+  items: state.taskManager.tasks.items,
+  allCategories: state.taskManager.categories,
+});
+
+export default connect(mapStateToProps, { setListRequest, updateTaskRequest })(TasksManager);

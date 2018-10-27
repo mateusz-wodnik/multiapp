@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import styles from '../Task.module.sass';
 import bs from '../../../../../styles/bootstrap.module.css';
-import { Link } from 'react-router-dom';
 
 const Header = class Header extends Component {
   constructor(props) {
@@ -13,12 +13,12 @@ const Header = class Header extends Component {
 
   render() {
     const {
-      title,
-      titleRef,
-      date,
       timeRef,
-      categories,
       categoriesRef,
+      titleRef,
+      title,
+      date,
+      categories,
       allCategories,
       editable,
       _id,
@@ -26,8 +26,8 @@ const Header = class Header extends Component {
       place,
     } = this.props;
     const {
-      geometry: { coordinates },
-      properties: { name },
+      geometry: { coordinates } = [],
+      properties: { name } = {},
     } = place;
     return (
       <header ref={this.header} className={`${styles.header} ${bs['card-header']}`} onClick={handleOpen}>
@@ -46,18 +46,21 @@ const Header = class Header extends Component {
           />
           )}
         </time>
-        <ul id={_id + 'categories'} ref={categoriesRef} className={styles.categories}>
-          {allCategories.map((category) => {
-            const isActive = categories.includes(category);
-            if (!editable && !isActive) return null;
-            return (
-              <li key={category} className={`${bs.badge} ${bs['badge-info']} ${styles.category}`}>
+        <ul id={`${_id}categories`} ref={categoriesRef} className={styles.categories}>
+          {editable ? (
+            allCategories.map(category => (
+              <li key={`${_id}-${category}`} className={`${bs.badge} ${bs['badge-info']} ${styles.category}`}>
                 {category}
-                {editable
-                && <input type="checkbox" defaultChecked={isActive} name="category" className={styles.checkbox} />}
+                <input type="checkbox" defaultChecked={categories.includes(category)} name="category" className={styles.checkbox} />
               </li>
-            );
-          })}
+            ))
+          ) : (
+            categories.map(category => (
+              <li key={`${_id}-${category}`} className={`${bs.badge} ${bs['badge-info']} ${styles.category}`}>
+                {category}
+              </li>
+            ))
+          )}
         </ul>
         {place && (
           <Link to={`/maps?coords=${coordinates.toString()}&name=${name}`} className={styles.place}>
@@ -71,21 +74,25 @@ const Header = class Header extends Component {
 };
 
 Header.defaultProps = {
+  _id: '',
+  handleOpen: () => null,
+  place: {},
   title: '',
   date: moment(),
   categories: [],
   allCategories: [],
   editable: false,
-  handleEditable: () => null,
 };
 
 Header.propTypes = {
+  _id: PropTypes.string,
+  handleOpen: PropTypes.func,
+  place: PropTypes.objectOf(PropTypes.any),
   title: PropTypes.string,
   date: PropTypes.objectOf(PropTypes.any),
   categories: PropTypes.arrayOf(PropTypes.string),
   allCategories: PropTypes.arrayOf(PropTypes.string),
   editable: PropTypes.bool,
-  handleEditable: PropTypes.func,
 };
 
 export default Header;

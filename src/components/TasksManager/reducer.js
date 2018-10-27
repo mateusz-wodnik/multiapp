@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
-import filters from './components/Filters/reducer';
-import list from './components/List/reducer';
+import FetchReducerCreator from '../../_utils/FetchReducerCreator';
 
 const defaultCategories = [
-  'categories',
   'important',
   'fun',
   'work',
@@ -13,11 +11,7 @@ const defaultCategories = [
   'shopping',
 ];
 
-export const initialState = [
-  ...defaultCategories,
-];
-
-function categories(state = initialState, action) {
+function categories(state = defaultCategories, action) {
   switch (action.type) {
     default:
       return state;
@@ -25,7 +19,6 @@ function categories(state = initialState, action) {
 }
 
 export default combineReducers({
-  filters,
-  list,
-  categories,
+  tasks: FetchReducerCreator('TASKS'),
+  categories: () => defaultCategories,
 });

@@ -50,9 +50,9 @@ const createTimeline = (tasks, forecast) => (
 );
 
 const mapStateToProps = state => ({
-  tasks: state.taskManager.list,
+  tasks: state.taskManager.tasks.items,
   forecast: state.weather.forecast,
-  timeline: createTimeline(state.taskManager.list, state.weather.forecast.items),
+  timeline: createTimeline(state.taskManager.tasks.items, state.weather.forecast.items),
 });
 
 export default connect(mapStateToProps, { setForecastRequest })(Timeline);
