@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Widget.module.sass';
-import bs from '../../../../styles/bootstrap.module.css';
 import DateInfo from '../../../../modules/DateInfo/DateInfo';
 import Clock from '../../../../modules/Clock/Clock';
 
 const Widget = ({
   wind, temp, icon, main,
 }) => (
-  <header className={`${styles.container} ${bs.container}`}>
+  <header className={styles.container}>
     <DateInfo styles={styles}>
       <Clock className={styles.clock} />
       <span className={styles.wind}>{`${wind.speed} m/s`}</span>

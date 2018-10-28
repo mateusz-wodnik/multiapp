@@ -15,7 +15,7 @@ class Timeline extends Component {
   render() {
     const { timeline } = this.props;
     return (
-      <article className={`${styles.container} ${bs.container}`}>
+      <article className={styles.container}>
         {timeline.map(item => (
           <a href={`#${item._id}`} key={item._id || item.date} className={styles.item}>
             {item.title && <span className={styles.title}>{item.title}</span>}

@@ -17,7 +17,7 @@ import Page from '../Weather/components/Page/Page';
 
 
 const App = () => (
-  <div className={`${styles.container}`}>
+  <div className={styles.container}>
     <Route
       path="/(tasks-list|weather|maps)"
       render={() => (
@@ -66,7 +66,7 @@ const App = () => (
           <Route
             path="/tasks-list"
             render={() => (
-              <TasksManager>
+              <TasksManager allowEditing>
                 <Filters>
                   <List />
                 </Filters>

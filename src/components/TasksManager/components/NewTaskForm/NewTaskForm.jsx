@@ -60,7 +60,7 @@ class NewTaskForm extends Component {
         </button>
         {opened && (
           createPortal(
-            <form className={`${styles.formContainer} ${bs.container}`} onSubmit={this.handleForm}>
+            <form className={styles.formContainer} onSubmit={this.handleForm}>
               <input
                 type="text"
                 className={bs['form-control']}

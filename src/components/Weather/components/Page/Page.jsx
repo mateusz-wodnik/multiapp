@@ -8,7 +8,7 @@ const Page = ({
   wind, temp, icon, main, pressure, humidity, temp_max: tempMax, temp_min: tempMin,
   forecast: { items },
 }) => (
-  <article className={`${styles.container} ${bs.container}`}>
+  <article className={styles.container}>
     <img
       src={`http://openweathermap.org/img/w/${icon}.png`}
       alt={main}

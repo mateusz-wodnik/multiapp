@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import bs from '../../styles/bootstrap.module.css';
 import styles from './Navigation.module.sass';
 
 const Navigation = () => (
-  <nav className={`${styles.container} ${bs.container}`}>
+  <nav className={styles.container}>
     <NavLink to="/overview" className={styles.link} activeClassName={styles.active}>Overview</NavLink>
     <NavLink to="/maps" className={styles.link} activeClassName={styles.active}>Map</NavLink>
     <NavLink to="/tasks-list" className={styles.link} activeClassName={styles.active}>Tasks</NavLink>
