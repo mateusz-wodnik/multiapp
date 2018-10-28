@@ -19,7 +19,7 @@ export class List extends Component {
     return (
       <ul className={`${styles.container} ${bs['list-group']}`}>
         {this.sortByDate(items).map(task => (
-          <li key={task._id} className={`${styles.item}`}>
+          <li key={task._id} id={task._id}  className={`${styles.item}`}>
             <Task
               {...task}
               allowEditing={allowEditing}

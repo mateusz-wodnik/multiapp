@@ -16,19 +16,19 @@ class Timeline extends Component {
     const { timeline } = this.props;
     return (
       <article className={`${styles.container} ${bs.container}`}>
-         {/*<span className={styles.line} />*/}
-        {timeline.map(task => (
-          <div key={task._id} className={styles.item}>
-            {!task.icon && <span className={styles.title}>{task.title}</span>}
-            {task.icon && (
+        {timeline.map(item => (
+          <a href={`#${item._id}`} key={item._id || item.date} className={styles.item}>
+            {item.title && <span className={styles.title}>{item.title}</span>}
+            {item.icon && (
               <img
-                src={`http://openweathermap.org/img/w/${task.icon}.png`}
+                src={`http://openweathermap.org/img/w/${item.icon}.png`}
                 className={styles.weather}
-                alt="icon"
+                alt={item.main}
               />
             )}
-            <span className={styles.time}>{moment(task.date).format('HH:mm')}</span>
-          </div>
+            {item.temp && <span className={styles.temp}>{item.temp}℃</span>}
+            <time className={styles.time}>{moment(item.date).format('HH:mm')}</time>
+          </a>
         ))}
       </article>
     );

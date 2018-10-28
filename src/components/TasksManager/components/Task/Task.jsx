@@ -34,7 +34,7 @@ class Task extends Component {
 
   handleEditable = () => {
     const { editable } = this.state;
-    const { date, updateTaskRequest, _id } = this.props;
+    const { date, updateTaskRequest, _id, place } = this.props;
     if (editable) {
       const {
         titleRef: { current: { textContent: title } },
@@ -59,6 +59,7 @@ class Task extends Component {
         description,
         date: newDate.toDate(),
         categories,
+        place,
       };
       updateTaskRequest(_id, task);
     }
@@ -95,7 +96,7 @@ class Task extends Component {
       categoriesRef,
     } = this;
     return (
-      <div id={_id} className={`${styles.container} ${bs.card}`}>
+      <div className={`${styles.container} ${bs.card}`}>
         {allowEditing && (
           <TopBar {...{
             _id,

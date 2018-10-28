@@ -1,7 +1,7 @@
 import { cloneElement, Component } from 'react';
 import connect from 'react-redux/es/connect/connect';
 import PropTypes from 'prop-types';
-import { setListRequest, updateTaskRequest } from './actions';
+import { setListRequest, updateTaskRequest, removeTaskRequest } from './actions';
 
 class TasksManager extends Component {
   componentDidMount() {
@@ -34,4 +34,4 @@ const mapStateToProps = state => ({
   allCategories: state.taskManager.categories,
 });
 
-export default connect(mapStateToProps, { setListRequest, updateTaskRequest })(TasksManager);
+export default connect(mapStateToProps, { setListRequest, updateTaskRequest, removeTaskRequest })(TasksManager);

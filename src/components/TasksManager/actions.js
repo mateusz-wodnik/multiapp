@@ -68,6 +68,7 @@ export const addTaskRequest = task => (
     const newTask = TaskModel(_id, task);
     set(_id, newTask, tasksStore)
       .then(() => dispatch(addTask(newTask)))
+      // TODO: Weird error "item is undefined" appears but new task is added anyway
       .catch(error => dispatch(errorTasks(error.message)));
   }
 );
@@ -84,6 +85,7 @@ export const updateTaskRequest = (_id, task) => (
     const newTask = TaskModel(_id, task);
     set(_id, newTask, tasksStore)
       .then(() => dispatch(updateTask(newTask)))
+      // TODO: Weird error "item is undefined" appears but task is being updated anyway
       .catch(error => dispatch(errorTasks(error.message)));
   }
 );
