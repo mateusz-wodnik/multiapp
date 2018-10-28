@@ -5,7 +5,7 @@ import styles from './Filters.module.sass';
 
 class Filters extends Component {
   state = {
-    items: [],
+    items: this.props.items,
     filters: [],
     filterTypes: [],
   };

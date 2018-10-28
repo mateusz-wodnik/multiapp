@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import styles from './App.module.sass';
 import TasksManager from '../TasksManager/TasksManager';
@@ -12,34 +12,69 @@ import Navigation from '../Navigation/Navigation';
 import NewTaskForm from '../TasksManager/components/NewTaskForm/NewTaskForm';
 import Filters from '../TasksManager/components/Filters/Filters';
 import List from '../TasksManager/components/List/List';
+import Widget from '../Weather/components/Widget/Widget';
+import Page from '../Weather/components/Page/Page';
 
 
 const App = () => (
   <div className={`${styles.container}`}>
     <Route
-      path="/tasks-list"
+      path="/(tasks-list|weather|maps)"
       render={() => (
         <BasicHeader>
-          <NewTaskForm />
+          <Route path="/tasks-list" component={NewTaskForm} />
         </BasicHeader>
       )}
     />
     {/* TODO: Add Loading screen component and route */}
-    <Route path="/overview" component={Weather} />
-    <Route path="/overview" component={Timeline} />
-    <Route path="/tasks-list" render={() => (
-      <TasksManager allowEditing>
-        <Filters>
-          <List />
-        </Filters>
-      </TasksManager>
-    )}
+    <Route
+      path="/(overview|weather)"
+      render={() => (
+        <Switch>
+          <Route
+            path="/overview"
+            render={() => (
+              <Weather>
+                <Widget />
+              </Weather>
+            )}
+          />
+          <Route
+            path="/weather"
+            render={() => (
+              <Weather setForecast>
+                <Page />
+              </Weather>
+            )}
+          />
+        </Switch>
+      )}
     />
-    <Route path="/overview" render={() => (
-      <TasksManager allowEditing>
-        <List />
-      </TasksManager>
-    )}
+    <Route path="/overview" component={Timeline} />
+    <Route
+      path="/(overview|tasks-list)"
+      render={() => (
+        <Switch>
+          <Route
+            path="/overview"
+            render={() => (
+              <TasksManager>
+                <List />
+              </TasksManager>
+            )}
+          />
+          <Route
+            path="/tasks-list"
+            render={() => (
+              <TasksManager>
+                <Filters>
+                  <List />
+                </Filters>
+              </TasksManager>
+            )}
+          />
+        </Switch>
+      )}
     />
     <Route path="/maps" component={Maps} />
     <Navigation />

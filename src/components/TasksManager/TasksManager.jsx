@@ -11,6 +11,7 @@ class TasksManager extends Component {
 
   render() {
     const { children, ...props } = this.props;
+    console.log(props.items)
     return (
       cloneElement(children, props)
     );
