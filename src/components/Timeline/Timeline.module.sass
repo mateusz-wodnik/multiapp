@@ -1,11 +1,14 @@
 .container
   display: flex
-  position: relative
+  position: sticky
+  top: 0
   min-height: 80px
   overflow: auto
-  padding: 15px
-  padding-right: 0
-  background: var(--second)
+  padding: 15px 0
+  background: linear-gradient(to left, var(--second), var(--third), var(--second))
+  z-index: 1
+  justify-content: space-between
+  align-items: flex-end
 .line
   position: absolute
   top: 0
@@ -20,21 +23,27 @@
   flex-flow: column
   justify-content: space-between
   align-items: center
-  //&:not(:first-child)
-  //  margin: 0 -10px
-.item:nth-child(2n)
-  //flex-direction: column-reverse
+  color: var(--fourth)
+  transition: 0.3s
+  border-radius: 5px
+  max-width: 120px
+  word-break: break-word
+  margin: 0 5px
+  &:first-child
+    margin-left: 15px
+  &:hover
+    color: var(--fourth)
+    box-shadow: 0px 0px 5px 0px var(--fourth)
+
 .title
   background: var(--third)
   border: 2px solid var(--first)
   border-radius: 5px
-  margin-right: 3px
   padding: 2px
+.temp
+  font-family: 'Roboto Medium'
+  font-size: 0.6em
 .time
-  //position: absolute
-  //left: 50%
-  //top: 50%
-  //transform: translate(-50%, -50%)
   font-size: 0.8em
   font-weight: 700
 

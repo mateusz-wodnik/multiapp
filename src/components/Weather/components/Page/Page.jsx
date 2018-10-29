@@ -3,30 +3,48 @@ import PropTypes from 'prop-types';
 import styles from './Page.module.sass';
 import bs from '../../../../styles/bootstrap.module.css';
 import moment from 'moment';
+import Timeline from '../../../Timeline/Timeline';
 
 const Page = ({
   wind, temp, icon, main, pressure, humidity, temp_max: tempMax, temp_min: tempMin,
   forecast: { items },
 }) => (
   <article className={styles.container}>
-    <img
-      src={`http://openweathermap.org/img/w/${icon}.png`}
-      alt={main}
-      className={styles.icon}
-    />
-    <div className={styles.main}>{main}</div>
-    <div className={styles.temperature}>{`${temp}℃`}</div>
-    <div className={styles.wind}>{`${!!wind && wind.speed} m/s`}</div>
-    <div className={styles.pressure}>{pressure}</div>
-    <div className={styles.humidity}>{humidity}</div>
-    <div className={styles.tempMin}>{tempMin}</div>
-    <div className={styles.tempMax}>{tempMax}</div>
-    {items.map(item => (
-      <div>
-        <span>{item.main}</span>
-        <span>{moment(item.date).day()}</span>
-      </div>
-    ))}
+    <ul className={`${bs['list-group']} ${bs['list-group-flush']}`}>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        {main}
+        <img
+          src={`http://openweathermap.org/img/w/${icon}.png`}
+          alt={main}
+          className={styles.value}
+        />
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        temperature
+        <span className={styles.value}>{temp}℃</span>
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        wind speed
+        <span className={styles.value}>{!!wind && wind.speed} m/s</span>
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        pressure
+        <span className={styles.value}>{pressure} ㍱</span>
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        humidity
+        <span className={styles.value}>{humidity}%</span>
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        Minimal temperature
+        <span className={styles.value}>{tempMin}℃</span>
+      </li>
+      <li className={`${styles.item} ${bs['list-group-item']}`}>
+        Maximal temperature
+        <span className={styles.value}>{tempMax}℃</span>
+      </li>
+    </ul>
+    <Timeline onlyWeather={true} />
   </article>
 );
 

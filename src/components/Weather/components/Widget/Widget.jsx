@@ -7,11 +7,11 @@ import Clock from '../../../../modules/Clock/Clock';
 const Widget = ({
   wind, temp, icon, main,
 }) => (
-  <header className={styles.container}>
+  <header id="weather" className={styles.container}>
     <DateInfo styles={styles}>
       <Clock className={styles.clock} />
-      <span className={styles.wind}>{`${wind.speed} m/s`}</span>
     </DateInfo>
+    <span className={styles.wind}>{`${wind.speed} m/s`}</span>
     <h4 className={styles.temperature}>{`${temp}℃`}</h4>
     <img
       src={`http://openweathermap.org/img/w/${icon}.png`}

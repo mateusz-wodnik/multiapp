@@ -17,7 +17,7 @@ export class List extends Component {
       items, allCategories, removeTaskRequest, updateTaskRequest, allowEditing,
     } = this.props;
     return (
-      <ul className={`${styles.container} ${bs['list-group']}`}>
+      <ul id="list" className={`${styles.container} ${bs['list-group']}`}>
         {this.sortByDate(items).map(task => (
           <li key={task._id} id={task._id}  className={`${styles.item}`}>
             <Task

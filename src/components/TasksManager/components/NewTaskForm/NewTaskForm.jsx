@@ -53,7 +53,7 @@ class NewTaskForm extends Component {
       <Fragment>
         <button
           type="button"
-          className={`${buttonStyles.open} ${bs.btn} ${bs[opened ? 'btn-danger' : 'btn-primary']}`}
+          className={`${buttonStyles.open} ${styles.btn} ${opened ? styles.opened : styles.closed}`}
           onClick={this.handleToggle}
         >
           {opened ? '✗' : '+'}

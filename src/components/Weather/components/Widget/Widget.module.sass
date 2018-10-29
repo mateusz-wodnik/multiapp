@@ -1,18 +1,21 @@
 .container
   display: grid
-  grid-template: auto / 1fr 1fr 1fr
-  grid-template-areas: 'info temperature icon'
-  padding: 0 15px
-  background: var(--first)
+  grid-template: auto auto / 1fr 1fr 1fr
+  grid-template-areas: 'info temperature icon' 'info temperature wind'
+  padding: 10px 15px
+  background: var(--fourth)
+  color: var(--third)
 .wind
-  grid-area: info
+  grid-area: wind
+  justify-self: end
 .temperature
   grid-area: temperature
   margin: auto
   font-size: 2em
 .icon
   grid-area: icon
-  margin: 0 0 auto auto
+  justify-self: end
+  align-self: center
 
 // Date module styles
 .dateInfo

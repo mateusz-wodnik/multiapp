@@ -7,16 +7,40 @@ import bs from '../../styles/bootstrap.module.css';
 import { setForecastRequest } from '../Weather/actions';
 
 class Timeline extends Component {
+  state = {
+    items: [],
+  };
+
   componentDidMount() {
-    const { setForecastRequest } = this.props;
+    const { setForecastRequest, tasks, forecast, onlyWeather } = this.props;
     setForecastRequest();
+    if (onlyWeather) return this.updateItems(forecast);
+    const timeline = this.createTimeline(tasks, forecast);
+    this.updateItems(timeline);
   }
 
+  componentDidUpdate(prevProps) {
+    const { onlyWeather, tasks, forecast } = this.props;
+    if (prevProps !== this.props) {
+      if (onlyWeather) return this.updateItems(forecast);
+      const timeline = this.createTimeline(tasks, forecast);
+      this.updateItems(timeline);
+    }
+  }
+
+  updateItems = items => this.setState({ items });
+
+  createTimeline = (tasks, forecast) => (
+    [...tasks, ...forecast].sort((a, b) => (
+      moment(a.date) - moment(b.date)
+    ))
+  );
+
   render() {
-    const { timeline } = this.props;
+    const { items } = this.state;
     return (
-      <article className={styles.container}>
-        {timeline.map(item => (
+      <article id="timeline" className={styles.container}>
+        {items.map(item => (
           <a href={`#${item._id}`} key={item._id || item.date} className={styles.item}>
             {item.title && <span className={styles.title}>{item.title}</span>}
             {item.icon && (
@@ -36,23 +60,20 @@ class Timeline extends Component {
 }
 
 Timeline.defaultProps = {
-  timeline: [],
+  tasks: [],
+  forecast: [],
+  onlyWeather: false,
 };
 
 Timeline.propTypes = {
-  timeline: PropTypes.arrayOf(PropTypes.object),
+  tasks: PropTypes.arrayOf(PropTypes.object1),
+  forecast: PropTypes.arrayOf(PropTypes.object1),
+  onlyWeather: PropTypes.bool,
 };
-
-const createTimeline = (tasks, forecast) => (
-  [...tasks, ...forecast].sort((a, b) => (
-    moment(a.date) - moment(b.date)
-  ))
-);
 
 const mapStateToProps = state => ({
   tasks: state.taskManager.tasks.items,
-  forecast: state.weather.forecast,
-  timeline: createTimeline(state.taskManager.tasks.items, state.weather.forecast.items),
+  forecast: state.weather.forecast.items,
 });
 
 export default connect(mapStateToProps, { setForecastRequest })(Timeline);
