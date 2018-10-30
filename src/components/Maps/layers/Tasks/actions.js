@@ -32,6 +32,7 @@ export const setMarkersRequest = () => (
           type: 'FeatureCollection',
           features,
         };
+        console.log(features)
         dispatch(setMarkers(geoJSON));
       })
       .catch(error => dispatch(errorMarkers(error.message)));

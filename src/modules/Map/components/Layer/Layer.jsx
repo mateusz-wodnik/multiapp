@@ -24,6 +24,7 @@ class Layer extends Component {
       map, features, id, hide,
     } = this.props;
     if (prevProps.features !== features) {
+      console.log('updataete', features)
       const source = map.getSource(id);
       if (source) source.setData(features);
     }
