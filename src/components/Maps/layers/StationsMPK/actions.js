@@ -1,4 +1,4 @@
-import stations from './stations.data';
+// import stations from '../../../../../public/stations.data';
 import MPKWroclawAPI from '../../../../APIS/MPKWroclawAPI';
 
 export const SET_STATIONS = 'SET_STATIONS';
@@ -29,8 +29,8 @@ export const setMarkersRequest = () => (
   (dispatch) => {
     dispatch(loadingMarkers());
     API.getStations()
-      .then(markers => dispatch(setMarkers(stations)))
-      .catch(error => dispatch(setMarkers(stations)));
+      .then(stations => dispatch(setMarkers(stations)))
+      .catch(error => dispatch(errorMarkers(error.message)));
       // .catch(error => dispatch(errorMarkers(error.message))); // TODO: fix API to fetch local files
   }
 );

@@ -21,7 +21,7 @@ export default class MPKWroclawAPI {
   }
 
   getStations = () => (
-    fetch('/stations')
+    fetch('/stations.data.json')
       .then(res => res.json())
   )
 }
