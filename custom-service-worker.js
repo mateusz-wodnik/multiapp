@@ -15,7 +15,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(cacheVersion)
       .then(cache => cache.addAll(urlsToCache))
-      .catch(err => console.log('Catche on install error'))
+      .catch(err => console.log(err.message))
   )
 });
 
