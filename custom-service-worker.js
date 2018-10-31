@@ -1,15 +1,16 @@
-const cacheVersion = 'multiapp-static-v1'
+const cacheVersion = 'multiapp-static-v2';
 
 self.addEventListener('install', (event) => {
   const urlsToCache = [
     '/',
     '/static/js/bundle.js',
-    '/static/js/0.chunk.js',
+    '/static/js/1.chunk.js',
     '/static/js/main.chunk.js',
     '/manifest.json',
     '/stations.data.json',
-    '/station.png',
-    '/tram-red.png',
+    '/static/media/station.png',
+    '/static/media/tram-red.png',
+    '/static/media/bus-blue.png',
   ];
   event.waitUntil(
     caches.open(cacheVersion)
@@ -32,13 +33,12 @@ self.addEventListener('fetch', (event) => {
         )
     );
   } else {
-    console.log(event)
     event.respondWith(
       caches.match(event.request)
         .then(res => {
           if (res) return res;
           return fetch(event.request)
-            .catch(error => console.log('Fetch error'))
+            .catch(error => console.log(error.message))
         })
     )
   }
