@@ -3,9 +3,11 @@ const cacheVersion = 'multiapp-static-v2';
 self.addEventListener('install', (event) => {
   const urlsToCache = [
     '/',
-    '/static/js/bundle.js',
-    '/static/js/1.chunk.js',
-    '/static/js/main.chunk.js',
+    '/maps',
+    '/maps',
+    // '/static/js/bundle.js',
+    // '/static/js/1.chunk.js',
+    // '/static/js/main.chunk.js',
     '/manifest.json',
     '/stations.data.json',
     '/static/media/station.png',
@@ -20,7 +22,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.slice(-4) === '.pbf') {
+  if (event.request.url.slice(-4) === '.pbf' || event.request.url.slice(-3) === '.js') {
     event.respondWith(
       caches.open(cacheVersion)
         .then(cache => cache.match(event.request)
