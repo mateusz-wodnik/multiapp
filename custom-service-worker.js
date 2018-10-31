@@ -2,8 +2,7 @@ const cacheVersion = 'multiapp-static-v2';
 
 self.addEventListener('install', (event) => {
   const urlsToCache = [
-    '/',
-    '/maps',
+    '/multiapp',
     '/maps',
     // '/static/js/bundle.js',
     // '/static/js/1.chunk.js',
