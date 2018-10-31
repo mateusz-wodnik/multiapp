@@ -4,6 +4,7 @@ self.addEventListener('install', (event) => {
   const urlsToCache = [
     '/multiapp',
     '/maps',
+    '/',
     // '/static/js/bundle.js',
     // '/static/js/1.chunk.js',
     // '/static/js/main.chunk.js',
