@@ -16,7 +16,7 @@ import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} basename={process.env.PUBLIC_URL}>
     <BrowserRouter>
       <Route path="/" component={App} />
     </BrowserRouter>

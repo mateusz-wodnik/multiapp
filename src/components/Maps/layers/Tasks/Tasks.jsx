@@ -37,7 +37,7 @@ class Tasks extends Component {
 
   render() {
     const { features, hide } = this.props;
-    return <Layer id="tasks" hide={hide} textField="name" features={features} icon="/tram-red.png" iconSize={1} custom={this.handleHover} />;
+    return <Layer id="tasks" hide={hide} textField="name" features={features} icon={`${process.env.PUBLIC_URL}/static/media/tram-red.png`} iconSize={1} custom={this.handleHover} />;
   }
 }
 

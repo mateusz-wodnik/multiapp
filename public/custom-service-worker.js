@@ -1,25 +1,28 @@
-const cacheVersion = 'multiapp-static-v1'
+const cacheVersion = 'multiapp-static-v2';
 
 self.addEventListener('install', (event) => {
   const urlsToCache = [
+    '/multiapp',
+    '/maps',
     '/',
-    '/static/js/bundle.js',
-    '/static/js/0.chunk.js',
-    '/static/js/main.chunk.js',
+    // '/static/js/bundle.js',
+    // '/static/js/1.chunk.js',
+    // '/static/js/main.chunk.js',
     '/manifest.json',
     '/stations.data.json',
-    '/station.png',
-    '/tram-red.png',
+    '/static/media/station.png',
+    '/static/media/tram-red.png',
+    '/static/media/bus-blue.png',
   ];
   event.waitUntil(
     caches.open(cacheVersion)
       .then(cache => cache.addAll(urlsToCache))
-      .catch(err => console.log('Catche on install error'))
+      .catch(err => console.log(err.message))
   )
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.slice(-4) === '.pbf') {
+  if (event.request.url.slice(-4) === '.pbf' || event.request.url.slice(-3) === '.js') {
     event.respondWith(
       caches.open(cacheVersion)
         .then(cache => cache.match(event.request)
@@ -32,13 +35,12 @@ self.addEventListener('fetch', (event) => {
         )
     );
   } else {
-    console.log(event)
     event.respondWith(
       caches.match(event.request)
         .then(res => {
           if (res) return res;
           return fetch(event.request)
-            .catch(error => console.log('Fetch error'))
+            .catch(error => console.log(error.message))
         })
     )
   }

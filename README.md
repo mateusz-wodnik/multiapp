@@ -1,30 +1,40 @@
-# Pokemon list
+# Task management and maps application
 
 ## Description
-Pokemon listing app, serving pokemon items from fake API using JSON file with all pokemons listed in it.
+This project is a tasks management PWA for mobile devices, that allows user to create and save tasks and related places.
+Map is created with Mapbox GL JS library and vector tiles from openMapTiles.  
+Application is able to work completely offline (excluding Google Places and OpenWeather service) after downloading to mobile device ('through save to screen'). It is possible thanks to IndexedDB which is used to store tasks data and Mapbox GL JS which was customized to serve offline stored tiles. 
 
-## Live version
-soon on heroku
+## Important files
+* `public/custom-service-worked.js` - custom service worker (application is not using service worker provided by CRA by default)
+* `public/static/wroclaw` - map tiles (refactored `.mbtiles` database to 'normal' folder structure)
+* `src/modules` - reusable, independent components
+* `src/components` - main application components
+* `src/_utils` - utilities
+* `src/APIS` - external APIS handlers
 
-## Dependencies
-To run dev or production version you need browser with enabled JavaScript.
+## Features in development
+* server side API that serves live MPK buses and trams position (application at the moment is using prepared JSON files to display MPK layer)
 
 ## Build setup
 This app was developed using:
-* CRA
-* React
 * ES6
+* CRA
+* Service workers
+* React.js
+* Mapbox GL JS
+* OpenMapTiles
 * SASS (original syntax)
+* CSS Modules
 * HTML5
-* Bootstrap v4
 
 ```bash
 # To install dev-dependencies, just go to the root folder and run
-npm i
-
-# To build production version run
-npm run build
+yarn install
 
 # To run dev version run
-npm run start
+yarn start
+
+# To build production version run
+yarn build
 ```

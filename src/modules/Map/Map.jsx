@@ -27,9 +27,10 @@ class Map extends Component {
       [16.652, 50.877], // Southwest coordinates
       [17.363, 51.311], // Northeast coordinates
     ];
+    console.log(process.env)
     const map = new mapboxgl.Map({
       container: this.mapContainer.current,
-      style: customStyle(location.origin, '/'), // eslint-disable-line
+      style: customStyle(`${location.origin}${process.env.PUBLIC_URL}`, '/static/'), // eslint-disable-line
       center: [17.038538, 51.107883],
       zoom: 14,
       maxZoom: 14,

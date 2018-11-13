@@ -21,7 +21,7 @@ export default class MPKWroclawAPI {
   }
 
   getStations = () => (
-    fetch('/stations.data.json')
+    fetch(`${process.env.PUBLIC_URL}/static/stations.data.json`)
       .then(res => res.json())
   )
 }

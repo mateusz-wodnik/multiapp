@@ -6,6 +6,7 @@ class Layer extends Component {
   componentDidMount() { //eslint-disable-line
     const { map, icon, custom } = this.props;
     if (map && icon) {
+      console.log(icon)
       return this.addIcon(map, icon)
         .then(() => {
           this.addLayer(map);
